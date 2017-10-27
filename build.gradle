@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.1.50' // Required for Kotlin integration
+    ext.kotlin_version = '1.1.51' // Required for Kotlin integration
     ext.spring_boot_version = '1.5.4.RELEASE'
     repositories {
         jcenter()
@@ -31,5 +31,5 @@ dependencies {
 }
 
 springBoot {
-    mainClass = 'initial.ApplicationKt'
+    mainClass = 'server.ApplicationKt'
 }
