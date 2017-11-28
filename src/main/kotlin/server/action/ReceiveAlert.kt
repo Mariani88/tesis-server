@@ -1,9 +1,9 @@
 package server.action
 
-import server.resource.dto.AlertDto
+import server.resource.dto.FireAlertDto
 
 class ReceiveAlert {
-    operator fun invoke(alertDto: AlertDto) {
+    operator fun invoke(fireAlertDto: FireAlertDto) {
 
         System.out.println("")
 
