@@ -1,12 +1,12 @@
-package server.resource
+package com.untref.tesis.server.resource
 
 import org.springframework.web.bind.annotation.GetMapping
-import server.resource.dto.FireAlertDto
+import com.untref.tesis.server.resource.dto.FireAlertDto
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import server.action.ReceiveAlert
-import server.resource.dto.ReceivedAlertDto
+import com.untref.tesis.server.action.ReceiveAlert
+import com.untref.tesis.server.resource.dto.ReceivedAlertDto
 
 
 @RestController

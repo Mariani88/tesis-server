@@ -1,4 +1,4 @@
-package server.domain
+package com.untref.tesis.server.domain
 
 enum class DetectionMethod {
 

@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.1.51' // Required for Kotlin integration
+    ext.kotlin_version = '1.2.0' // Required for Kotlin integration
     ext.spring_boot_version = '1.5.4.RELEASE'
     repositories {
         jcenter()
@@ -27,9 +27,10 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Required for Kotlin integration
     compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'io.reactivex:rxjava:1.1.6'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 springBoot {
-    mainClass = 'server.ApplicationKt'
+    mainClass = 'com.untref.tesis.server.ApplicationKt'
 }

@@ -1,7 +1,7 @@
-package server.resource.dto
+package com.untref.tesis.server.resource.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import server.domain.DetectionMethod
+import com.untref.tesis.server.domain.DetectionMethod
 
 data class FireAlertDto(
         @JsonProperty("coor")

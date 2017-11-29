@@ -1,10 +1,10 @@
-package server.action
+package com.untref.tesis.server.action
 
-import server.resource.dto.FireAlertDto
+import rx.Single
+import com.untref.tesis.server.resource.dto.FireAlertDto
 
 class ReceiveAlert {
     operator fun invoke(fireAlertDto: FireAlertDto) {
-
         System.out.println("")
 
 
