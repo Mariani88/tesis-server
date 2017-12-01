@@ -4,4 +4,4 @@ jdk:
 
 install: gradle assemble
 script: ./gradlew check
-
+build: gradle check
