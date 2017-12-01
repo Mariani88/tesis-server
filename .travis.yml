@@ -1,1 +1,1 @@
-gradle test
+build: gradle test
