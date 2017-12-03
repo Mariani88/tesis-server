@@ -5,8 +5,6 @@ import com.untref.tesis.server.resource.dto.FireAlertDto
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import com.untref.tesis.server.action.ReceiveAlert
-import com.untref.tesis.server.action.ReceiveAlertActionData
 import com.untref.tesis.server.resource.dto.ReceivedAlertDto
 
 

@@ -1,13 +1,14 @@
-package com.untref.tesis.server.action
+package com.untref.tesis.server.unit.action
 
-import com.untref.tesis.server.domain.AlertRepository
-
-import com.untref.tesis.server.domain.Coordinates
-import com.untref.tesis.server.domain.DetectionMethod
+import com.untref.tesis.server.domain.*
+import com.untref.tesis.server.extensions.MockitoExtensions
 import org.junit.Assert
-import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.Mockito.times
+import org.mockito.MockitoAnnotations
 import repository.InMemoryAlertRepository
 
 class ReceiveAlertTest {
@@ -20,14 +21,18 @@ class ReceiveAlertTest {
     private val gas = 450f
     private val firstId = 1L
 
-    lateinit var receiveAlert: ReceiveAlert
-    lateinit var alert: ReceiveAlertActionData
-    lateinit var alertRepository: AlertRepository
+    private lateinit var receiveAlert: ReceiveAlert
+    private lateinit var alert: ReceiveAlertActionData
+    private lateinit var alertRepository: AlertRepository
 
-   @Before
+    @Mock
+    private lateinit var alertNotificationService: AlertNotificationService
+
+    @Before
     fun setUp() {
-       alertRepository = InMemoryAlertRepository()
-        receiveAlert = ReceiveAlert(alertRepository)
+        MockitoAnnotations.initMocks(this)
+        alertRepository = InMemoryAlertRepository()
+        receiveAlert = ReceiveAlert(alertRepository, alertNotificationService)
     }
 
     @Test
@@ -37,10 +42,17 @@ class ReceiveAlertTest {
         thenAlertIsStored()
     }
 
-    /*@Test
+    @Test
     fun receiveAlertShouldSendItToClient() {
-        fail()
-    }*/
+        givenAlert()
+        whenReceiveAlert()
+        thenSentAlertToClient()
+    }
+
+    private fun thenSentAlertToClient() {
+        val invocations = 1
+        Mockito.verify(alertNotificationService, times(invocations)).send(MockitoExtensions.anyObjectOf(Alert::class.java))
+    }
 
     private fun thenAlertIsStored() {
         val storedAlert = alertRepository.findById(firstId)
