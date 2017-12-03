@@ -1,5 +1,7 @@
 package com.untref.tesis.server.unit.action
 
+import com.untref.tesis.server.action.ReceiveAlert
+import com.untref.tesis.server.action.ReceiveAlertActionData
 import com.untref.tesis.server.domain.*
 import com.untref.tesis.server.extensions.MockitoExtensions
 import org.junit.Assert

@@ -1,4 +1,4 @@
-package com.untref.tesis.server.unit.action
+package com.untref.tesis.server.action
 
 import com.untref.tesis.server.domain.Coordinates
 import com.untref.tesis.server.domain.DetectionMethod
