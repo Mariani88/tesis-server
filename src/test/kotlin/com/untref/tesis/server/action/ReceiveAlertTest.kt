@@ -1,12 +1,15 @@
 package com.untref.tesis.server.action
 
-import com.untref.tesis.server.domain.Alert
+import com.untref.tesis.server.domain.AlertRepository
 
 import com.untref.tesis.server.domain.Coordinates
 import com.untref.tesis.server.domain.DetectionMethod
+import org.junit.Assert
 import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
+import repository.InMemoryAlertRepository
+
 class ReceiveAlertTest {
 
     private val latitude = "57°-23'-24''"
@@ -15,13 +18,16 @@ class ReceiveAlertTest {
     private val coordinates = Coordinates(latitude, longitude)
     private val temperature = 60f
     private val gas = 450f
+    private val firstId = 1L
 
     lateinit var receiveAlert: ReceiveAlert
-    lateinit var alert: Alert
+    lateinit var alert: ReceiveAlertActionData
+    lateinit var alertRepository: AlertRepository
 
-   /* @Before
+   @Before
     fun setUp() {
-        receiveAlert = ReceiveAlert()
+       alertRepository = InMemoryAlertRepository()
+        receiveAlert = ReceiveAlert(alertRepository)
     }
 
     @Test
@@ -29,25 +35,27 @@ class ReceiveAlertTest {
         givenAlert()
         whenReceiveAlert()
         thenAlertIsStored()
-
-
-        fail()
     }
+
+    /*@Test
+    fun receiveAlertShouldSendItToClient() {
+        fail()
+    }*/
 
     private fun thenAlertIsStored() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val storedAlert = alertRepository.findById(firstId)
+        Assert.assertEquals(storedAlert.id, firstId)
+        Assert.assertEquals(storedAlert.coordinates, coordinates)
+        Assert.assertEquals(storedAlert.detectionMethods, detectionMethods)
+        Assert.assertEquals(storedAlert.temperature, temperature)
+        Assert.assertEquals(storedAlert.gas, gas)
     }
+
     private fun whenReceiveAlert() {
         receiveAlert(alert)
     }
 
-
     private fun givenAlert() {
-        alert = Alert(coordinates, detectionMethods, temperature, gas)
+        alert = ReceiveAlertActionData(coordinates, detectionMethods, temperature, gas)
     }
-
-    @Test
-    fun receiveAlertShouldSendItToClient() {
-        fail()
-    }*/
 }
