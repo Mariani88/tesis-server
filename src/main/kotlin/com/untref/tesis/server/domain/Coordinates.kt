@@ -1,3 +1,5 @@
 package com.untref.tesis.server.domain
 
-class Coordinates (val latitude:String, val longitude: String)
+import java.io.Serializable
+
+data class Coordinates (val latitude:String, val longitude: String): Serializable

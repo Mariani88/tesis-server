@@ -1,6 +1,8 @@
 package com.untref.tesis.server.domain
 
-enum class DetectionMethod {
+import java.io.Serializable
+
+enum class DetectionMethod: Serializable {
 
     SMOKE, TEMPERATURE, FIRE, TEMPERATURE_INCREMENT
 }
