@@ -11,7 +11,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.times
 import org.mockito.MockitoAnnotations
-import repository.InMemoryAlertRepository
+import com.untref.tesis.server.unit.repository.InMemoryAlertRepository
 
 class ReceiveAlertTest {
 
