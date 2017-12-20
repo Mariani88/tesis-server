@@ -2,6 +2,7 @@ package com.untref.tesis.server.unit.action
 
 import com.untref.tesis.server.action.ReceiveAlert
 import com.untref.tesis.server.action.ReceiveAlertActionData
+import com.untref.tesis.server.builders.CoordinatesBuilder
 import com.untref.tesis.server.domain.*
 import com.untref.tesis.server.extensions.MockitoExtensions
 import org.junit.Assert
@@ -15,10 +16,8 @@ import com.untref.tesis.server.unit.repository.InMemoryAlertRepository
 
 class ReceiveAlertTest {
 
-    private val latitude = "57°-23'-24''"
-    private val longitude = "34°-45'-54''"
     private val detectionMethods = listOf(DetectionMethod.TEMPERATURE, DetectionMethod.FIRE)
-    private val coordinates = Coordinates(latitude, longitude)
+    private val coordinates = CoordinatesBuilder.createCoordinates()
     private val temperature = 60f
     private val gas = 450f
     private val firstId = 1L

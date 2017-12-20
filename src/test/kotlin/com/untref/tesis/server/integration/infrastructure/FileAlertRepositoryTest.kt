@@ -1,9 +1,8 @@
-package com.untref.tesis.server.integration
+package com.untref.tesis.server.integration.infrastructure
 
-import com.untref.tesis.server.domain.Alert
-import com.untref.tesis.server.domain.Coordinates
-import com.untref.tesis.server.domain.DetectionMethod
-import com.untref.tesis.server.infrastructure.persistence.FileAlertRepository
+import com.untref.tesis.server.builders.CoordinatesBuilder
+import com.untref.tesis.server.domain.*
+import com.untref.tesis.server.infrastructure.persistence.file.FileAlertRepository
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -16,21 +15,20 @@ class FileAlertRepositoryTest {
     private lateinit var alert: Alert
     private val alertId = 1L
     private lateinit var storedAlert: Alert
-    private val longitude = "44°-45'-21''"
-    private val latitude = "32°-34'-45''"
-    private val coordinates = Coordinates(latitude, longitude)
+    private val coordinates = CoordinatesBuilder.createCoordinates()
     private val detectionMethods = listOf(DetectionMethod.FIRE)
     private val temperature = 40f
     private val gas = 430f
+    private val path = "alertsTest.dat"
 
     @Before
     fun setUp() {
-        fileAlertRepository = FileAlertRepository()
+        fileAlertRepository = FileAlertRepository(path)
     }
 
     @After
     fun clean(){
-        File("alerts.dat").delete()
+        File(path).delete()
     }
 
     @Test

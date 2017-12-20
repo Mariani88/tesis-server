@@ -1,12 +1,11 @@
 package com.untref.tesis.server.resource
 
-import org.springframework.web.bind.annotation.GetMapping
 import com.untref.tesis.server.resource.dto.FireAlertDto
+import com.untref.tesis.server.resource.dto.ReceivedAlertDto
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import com.untref.tesis.server.resource.dto.ReceivedAlertDto
-
 
 @RestController
 class AlarmResource {
@@ -24,12 +23,12 @@ class AlarmResource {
         return ReceivedAlertDto(true)
     }
 
-    /*//TODO testear las validaciones
-    private fun createReceiveAlertActionData(fireAlertDto: FireAlertDto): ReceiveAlertActionData {
-        val coordinates = validate(fireAlertDto.coordinates)
-        val detectionMethods = validate(fireAlertDto.detectionMethods)
-        val temperature = validate(fireAlertDto.temperature)
-        val gas = validate(fireAlertDto.gas)
-        return ReceiveAlertActionData(coordinates, detectionMethods, temperature, gas)
+    //TODO testear las validaciones
+    /*private fun createReceiveAlertActionData(fireAlertDto: FireAlertDto): ReceiveAlertActionData {
+        //val coordinates = validate(fireAlertDto.coordinates)
+        //val detectionMethods = validate(fireAlertDto.detectionMethods)
+        //val temperature = validate(fireAlertDto.temperature)
+        //val gas = validate(fireAlertDto.gas)
+        return ReceiveAlertActionData(fireAlertDto.coordinates, detectionMethods, temperature, gas)
     }*/
 }
