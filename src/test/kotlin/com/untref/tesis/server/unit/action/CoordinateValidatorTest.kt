@@ -1,16 +1,78 @@
 package com.untref.tesis.server.unit.action
 
-import org.junit.Assert.fail
+import com.untref.tesis.server.action.CoordinateValidator
+import com.untref.tesis.server.domain.CardinalPoint
+import com.untref.tesis.server.resource.dto.CoordinateDto
+import com.untref.tesis.server.resource.dto.CoordinatesDto
+import org.junit.Assert
+
+import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.ExpectedException
 
 class CoordinateValidatorTest {
 
-    /*@Test
-    fun latitudeDegreeLowerThan0ThrowsException(){
-        fail()
+    private lateinit var coordinatesDto: CoordinatesDto
+    private lateinit var exception: Exception
+
+    @JvmField
+    @Rule
+    val expectedException: ExpectedException = ExpectedException.none()
+
+    //TODO AGREGAR TESTS PARA NO NULOS
+
+    @Test
+    fun latitudeCanNotBeNull(){
+        val latitude = null
+        val longitude = CoordinateDto(30, 50, 23.4f, CardinalPoint.EAST)
+        coordinatesDto = CoordinatesDto(latitude, longitude)
+
+        try{
+            CoordinateValidator.validate(coordinatesDto)
+        }catch (e: RuntimeException){
+            exception = e
+        }
+
+        Assert.assertNotNull(exception)
+        Assert.assertEquals("Degree can not null", exception.message)
     }
 
     @Test
+    fun latitudeDegreeWithNullValueThrowsException(){
+        val latitude = CoordinateDto(null, 50, 23.4f, CardinalPoint.SOUTH)
+        val longitude = CoordinateDto(30, 50, 23.4f, CardinalPoint.EAST)
+        coordinatesDto = CoordinatesDto(latitude, longitude)
+
+        try{
+            CoordinateValidator.validate(coordinatesDto)
+        }catch (e: RuntimeException){
+            exception = e
+        }
+
+        Assert.assertNotNull(exception)
+        Assert.assertEquals("Degree can not null", exception.message)
+    }
+
+
+
+    @Test
+    fun latitudeDegreeLowerThan0ThrowsException(){
+
+        val latitude = CoordinateDto(-1, 50, 23.4f, CardinalPoint.SOUTH)
+        val longitude = CoordinateDto(30, 50, 23.4f, CardinalPoint.EAST)
+        coordinatesDto = CoordinatesDto(latitude, longitude)
+
+        try{
+            CoordinateValidator.validate(coordinatesDto)
+        }catch (e: RuntimeException){
+            exception = e
+        }
+
+        Assert.assertNotNull(exception)
+        Assert.assertEquals("Degree can not lower than 0", exception.message)
+    }
+
+    /*@Test
     fun latitudeDegreeHigherThan90ThrowsException(){
         fail()
     }
