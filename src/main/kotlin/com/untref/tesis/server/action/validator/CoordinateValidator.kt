@@ -1,4 +1,4 @@
-package com.untref.tesis.server.action
+package com.untref.tesis.server.action.validator
 
 import com.untref.tesis.server.domain.Coordinate
 import com.untref.tesis.server.domain.Coordinates
@@ -14,15 +14,16 @@ class CoordinateValidator {
             return Coordinates(latitude, longitude)
         }
 
-        private fun validateLongitude(longitude: CoordinateDto?): Coordinate {
-            return Coordinate(longitude!!.degree!!, longitude!!.minute!!, longitude!!.second!!, longitude!!.cardinalPoint!!)
+        private fun validateLongitude(longitudeDto: CoordinateDto?): Coordinate {
+            val longitude = checkNotNull(longitudeDto, longitudeCanNotBeNull)
+            return Coordinate(longitude.degree!!, longitude.minute!!, longitude.second!!, longitude.cardinalPoint!!)
         }
 
         private fun validateLatitude(latitudeDto: CoordinateDto?): Coordinate {
-            val latitude = checkNotNull(latitudeDto, "Degree can not null")
-            val degree = checkNotNull(latitude.degree, "Degree can not null")
-            if(degree < 0) throw RuntimeException("Degree can not lower than 0")
-            return Coordinate(degree, latitudeDto!!.minute!!, latitudeDto!!.second!!, latitudeDto!!.cardinalPoint!!)
+            val latitude = checkNotNull(latitudeDto, latitudeCanNotBeNull)
+            val degree = checkNotNull(latitude.degree, degreeCanNotBeNull)
+            if (degree < 0) throw RuntimeException(degreeCanNotBeLowerThan0)
+            return Coordinate(degree, latitudeDto!!.minute!!, latitudeDto.second!!, latitudeDto.cardinalPoint!!)
         }
 
 
