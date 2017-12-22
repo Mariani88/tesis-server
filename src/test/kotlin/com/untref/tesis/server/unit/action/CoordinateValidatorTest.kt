@@ -31,6 +31,9 @@ class CoordinateValidatorTest {
     private val latitudeCanNotBeNull = "Latitude can not null"
     private val degreeCanNotBeLowerThan0 = "Degree can not lower than 0"
     private val longitudeCanNotBeNull = "Longitude can not be null"
+    private val degreeCanNotBeHigherThan90ForLatitude = "degree can not be higher than 90 for latitude"
+    private val minuteCanNotBeNull = "minute can not be null"
+
 
     //TODO AGREGAR TESTS PARA NO NULOS
 
@@ -76,80 +79,97 @@ class CoordinateValidatorTest {
         thenThrowsExceptionWithMessage(degreeCanNotBeLowerThan0)
     }
 
+    @Test
+    fun latitudeDegreeHigherThan90ThrowsException() {
+        givenALatitude(degree = 91)
+        givenALongitude()
+        givenACoordinates()
+
+        whenTryValidate()
+
+        thenThrowsExceptionWithMessage(degreeCanNotBeHigherThan90ForLatitude)
+    }
+
+    @Test
+    fun latitudeMinuteNullThrowsException(){
+        givenALatitude(minute = null)
+        givenALongitude()
+        givenACoordinates()
+
+        whenTryValidate()
+
+        thenThrowsExceptionWithMessage(minuteCanNotBeNull)
+    }
+
     /*@Test
-    fun latitudeDegreeHigherThan90ThrowsException(){
-        fail()
-    }
+   fun latitudeMinuteLowerThan0ThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun latitudeMinuteLowerThan0ThrowsException(){
-        fail()
-    }
+   @Test
+   fun latitudeMinuteHigherOrEqualsThan60ThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun latitudeMinuteHigherOrEqualsThan60ThrowsException(){
-        fail()
-    }
+   @Test
+   fun latitudeSecondsLowerThan0ThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun latitudeSecondsLowerThan0ThrowsException(){
-        fail()
-    }
+   @Test
+   fun latitudeSecondsHigherOrEqualsThan60ThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun latitudeSecondsHigherOrEqualsThan60ThrowsException(){
-        fail()
-    }
+   @Test
+   fun longitudeDegreeLowerThan0ThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun longitudeDegreeLowerThan0ThrowsException(){
-        fail()
-    }
+   @Test
+   fun longitudeDegreeHigherThan180ThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun longitudeDegreeHigherThan180ThrowsException(){
-        fail()
-    }
+   @Test
+   fun longitudeMinuteLowerThan0ThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun longitudeMinuteLowerThan0ThrowsException(){
-        fail()
-    }
+   @Test
+   fun longitudeMinuteHigherOrEqualsThan60ThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun longitudeMinuteHigherOrEqualsThan60ThrowsException(){
-        fail()
-    }
+   @Test
+   fun longitudeSecondsLowerThan0ThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun longitudeSecondsLowerThan0ThrowsException(){
-        fail()
-    }
+   @Test
+   fun longitudeSecondsHigherOrEqualsThan60ThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun longitudeSecondsHigherOrEqualsThan60ThrowsException(){
-        fail()
-    }
+   @Test
+   fun latitudeWithEastCardinalPointThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun latitudeWithEastCardinalPointThrowsException(){
-        fail()
-    }
+   @Test
+   fun latitudeWithWestCardinalPointThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun latitudeWithWestCardinalPointThrowsException(){
-        fail()
-    }
+   @Test
+   fun longitudeWithNorthCardinalPointThrowsException(){
+       fail()
+   }
 
-    @Test
-    fun longitudeWithNorthCardinalPointThrowsException(){
-        fail()
-    }
-
-    @Test
-    fun longitudeWithSouthCardinalPointThrowsException(){
-        fail()
-    }*/
+   @Test
+   fun longitudeWithSouthCardinalPointThrowsException(){
+       fail()
+   }*/
 
     private fun thenThrowsExceptionWithMessage(message: String) {
         Assert.assertNotNull(exception)

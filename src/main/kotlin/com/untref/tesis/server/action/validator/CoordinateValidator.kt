@@ -22,8 +22,10 @@ class CoordinateValidator {
         private fun validateLatitude(latitudeDto: CoordinateDto?): Coordinate {
             val latitude = checkNotNull(latitudeDto, latitudeCanNotBeNull)
             val degree = checkNotNull(latitude.degree, degreeCanNotBeNull)
+            val minute = checkNotNull(latitude.minute, minuteCanNotBeNull)
             if (degree < 0) throw RuntimeException(degreeCanNotBeLowerThan0)
-            return Coordinate(degree, latitudeDto!!.minute!!, latitudeDto.second!!, latitudeDto.cardinalPoint!!)
+            if(degree > 90) throw RuntimeException(degreeCanNotBeHigherThan90ForLatitude)
+            return Coordinate(degree, minute, latitudeDto?.second!!, latitudeDto.cardinalPoint!!)
         }
 
 
