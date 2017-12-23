@@ -38,7 +38,9 @@ class CoordinateValidatorTest {
     private val secondCanNotBeNull = "second can not be null"
     private val secondCanNotBeLowerThanZero = "second can not be lower than zero"
     private val secondCanNotBeHigherOrEqualsThanSixteen = "second can not be higher or equals than 60"
-
+    private val longitudeDegreeCanNotBeNull = "longitude degree can not be null"
+    private val longitudeDegreeCanNotLowerThanZero = "longitude degree can not lower than 0"
+    private val longitudeDegreeCanNotHigherThanOneHundredEighteen = "longitude degree can not higher  than one hundred eighteen"
     //TODO AGREGAR TESTS PARA NO NULOS
 
     @Test
@@ -128,7 +130,7 @@ class CoordinateValidatorTest {
     }
 
     @Test
-    fun secondWithNullValueThrowsException(){
+    fun secondWithNullValueThrowsException() {
         givenALatitude(second = null)
         givenALongitude()
         givenACoordinates()
@@ -138,10 +140,8 @@ class CoordinateValidatorTest {
         thenThrowsExceptionWithMessage(secondCanNotBeNull)
     }
 
-
-
     @Test
-    fun latitudeSecondsLowerThan0ThrowsException(){
+    fun latitudeSecondsLowerThan0ThrowsException() {
         givenALatitude(second = -0.01f)
         givenALongitude()
         givenACoordinates()
@@ -152,7 +152,7 @@ class CoordinateValidatorTest {
     }
 
     @Test
-    fun latitudeSecondsHigherOrEqualsThan60ThrowsException(){
+    fun latitudeSecondsHigherOrEqualsThan60ThrowsException() {
         givenALatitude(second = 60f)
         givenALongitude()
         givenACoordinates()
@@ -162,17 +162,37 @@ class CoordinateValidatorTest {
         thenThrowsExceptionWithMessage(secondCanNotBeHigherOrEqualsThanSixteen)
     }
 
+    @Test
+    fun longitudeDegreeNullThrowsException() {
+        givenALongitude(degree = null)
+        givenALatitude()
+        givenACoordinates()
+
+        whenTryValidate()
+        thenThrowsExceptionWithMessage(longitudeDegreeCanNotBeNull)
+    }
+
+    @Test
+    fun longitudeDegreeLowerThan0ThrowsException() {
+        givenALongitude(degree = -1)
+        givenALatitude()
+        givenACoordinates()
+
+        whenTryValidate()
+        thenThrowsExceptionWithMessage(longitudeDegreeCanNotLowerThanZero)
+    }
+
+    @Test
+    fun longitudeDegreeHigherThan180ThrowsException() {
+        givenALongitude(degree = 180)
+        givenALatitude()
+        givenACoordinates()
+
+        whenTryValidate()
+        thenThrowsExceptionWithMessage(longitudeDegreeCanNotHigherThanOneHundredEighteen)
+    }
+
     /*@Test
-    fun longitudeDegreeLowerThan0ThrowsException(){
-        fail()
-    }
-
-    @Test
-    fun longitudeDegreeHigherThan180ThrowsException(){
-        fail()
-    }
-
-    @Test
     fun longitudeMinuteLowerThan0ThrowsException(){
         fail()
     }
