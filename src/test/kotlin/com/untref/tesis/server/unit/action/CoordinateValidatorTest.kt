@@ -36,6 +36,8 @@ class CoordinateValidatorTest {
     private val minuteCanNotLowerThanZero = "minute can not lower than 0"
     private val minuteCanNotHigherOrEqualsThanSixteen = "minute can not higher or equals than 60"
     private val secondCanNotBeNull = "second can not be null"
+    private val secondCanNotBeLowerThanZero = "second can not be lower than zero"
+    private val secondCanNotBeHigherOrEqualsThanSixteen = "second can not be higher or equals than 60"
 
     //TODO AGREGAR TESTS PARA NO NULOS
 
@@ -138,17 +140,29 @@ class CoordinateValidatorTest {
 
 
 
-    /*@Test
+    @Test
     fun latitudeSecondsLowerThan0ThrowsException(){
-        fail()
+        givenALatitude(second = -0.01f)
+        givenALongitude()
+        givenACoordinates()
+
+        whenTryValidate()
+
+        thenThrowsExceptionWithMessage(secondCanNotBeLowerThanZero)
     }
 
     @Test
     fun latitudeSecondsHigherOrEqualsThan60ThrowsException(){
-        fail()
+        givenALatitude(second = 60f)
+        givenALongitude()
+        givenACoordinates()
+
+        whenTryValidate()
+
+        thenThrowsExceptionWithMessage(secondCanNotBeHigherOrEqualsThanSixteen)
     }
 
-    @Test
+    /*@Test
     fun longitudeDegreeLowerThan0ThrowsException(){
         fail()
     }

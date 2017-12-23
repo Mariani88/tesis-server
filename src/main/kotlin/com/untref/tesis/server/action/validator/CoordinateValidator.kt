@@ -28,8 +28,8 @@ class CoordinateValidator {
             if (degree > 90) throw RuntimeException(degreeCanNotBeHigherThan90ForLatitude)
             if (minute < 0) throw RuntimeException(minuteCanNotLowerThanZero)
             if (minute >= 60) throw RuntimeException(minuteCanNotHigherOrEqualsThanSixteen)
-
-
+            if(second < 0) throw RuntimeException(secondCanNotBeLowerThanZero)
+            if (second>=60) throw RuntimeException(secondCanNotBeHigherOrEqualsThanSixteen)
             return Coordinate(degree, minute, second, latitudeDto?.cardinalPoint!!)
         }
 
