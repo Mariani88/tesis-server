@@ -47,208 +47,175 @@ class CoordinateValidatorTest {
     private val longitudeSecondCanNotNull = "longitude second can not be null"
     private val longitudeSecondCanNotLowerThan0 = "longitude second can not lower than 0"
     private val longitudeSecondCanNotHigherOrEqualsThan60 = "longitude second can not higher or equals than 60"
-
-
-    //TODO AGREGAR TESTS PARA NO NULOS
+    private val latitudeCardinalPointCanNotBeNull = "latitude cardinal point can not be null"
+    private val latitudeCardinalPointCanNotBeEast = "latitude cardinal point can not be east"
+    private val latitudeCardinalPointCanNotBeWest = "latitude cardinal point can not be west"
+    private val longitudeCardinalPointCanNotBeNull = "longitude cardinal point can not be null"
+    private val longitudeCardinalPointCanNotBeNorth = "longitude cardinal point can not be north"
+    private val longitudeCardinalPointCanNotBeSouth = "longitude cardinal point can not be south"
 
     @Test
     fun latitudeCanNotBeNull() {
-        givenALongitude()
-        givenACoordinates()
-
-        whenTryValidate()
-
-        thenThrowsExceptionWithMessage(latitudeCanNotBeNull)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() },latitudeCanNotBeNull)
     }
 
     @Test
     fun longitudeCanNotBeNull() {
-        givenALatitude()
-        givenACoordinates()
-
-        whenTryValidate()
-
-        thenThrowsExceptionWithMessage(longitudeCanNotBeNull)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() },longitudeCanNotBeNull)
     }
 
     @Test
     fun latitudeDegreeWithNullValueThrowsException() {
         givenALatitude(degree = null)
-        thenExpectedExceptionWhenTryValidate(degreeCanNotBeNull)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, degreeCanNotBeNull)
     }
 
     @Test
     fun latitudeDegreeLowerThan0ThrowsException() {
         givenALatitude(degree = -1)
-        thenExpectedExceptionWhenTryValidate(degreeCanNotBeLowerThan0)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, degreeCanNotBeLowerThan0)
     }
 
     @Test
     fun latitudeDegreeHigherThan90ThrowsException() {
         givenALatitude(degree = 91)
-        thenExpectedExceptionWhenTryValidate(degreeCanNotBeHigherThan90ForLatitude)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, degreeCanNotBeHigherThan90ForLatitude)
     }
 
     @Test
     fun latitudeMinuteNullThrowsException() {
         givenALatitude(minute = null)
-        thenExpectedExceptionWhenTryValidate(minuteCanNotBeNull)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, minuteCanNotBeNull)
     }
 
     @Test
     fun latitudeMinuteLowerThan0ThrowsException() {
         givenALatitude(minute = -1)
-        thenExpectedExceptionWhenTryValidate(minuteCanNotLowerThanZero)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, minuteCanNotLowerThanZero)
     }
 
     @Test
     fun latitudeMinuteHigherOrEqualsThan60ThrowsException() {
         givenALatitude(minute = 60)
-        thenExpectedExceptionWhenTryValidate(minuteCanNotHigherOrEqualsThanSixteen)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, minuteCanNotHigherOrEqualsThanSixteen)
     }
 
     @Test
     fun secondWithNullValueThrowsException() {
         givenALatitude(second = null)
-        thenExpectedExceptionWhenTryValidate(secondCanNotBeNull)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, secondCanNotBeNull)
     }
 
     @Test
     fun latitudeSecondsLowerThan0ThrowsException() {
         givenALatitude(second = -0.01f)
-        thenExpectedExceptionWhenTryValidate(secondCanNotBeLowerThanZero)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, secondCanNotBeLowerThanZero)
     }
 
     @Test
     fun latitudeSecondsHigherOrEqualsThan60ThrowsException() {
         givenALatitude(second = 60f)
-        thenExpectedExceptionWhenTryValidate(secondCanNotBeHigherOrEqualsThanSixteen)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, secondCanNotBeHigherOrEqualsThanSixteen)
     }
 
+    @Test
+    fun latitudeWithNullCardinalPointThrowsException() {
+        givenALatitude(cardinalPoint = null)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, latitudeCardinalPointCanNotBeNull)
+    }
 
-    private fun thenExpectedExceptionWhenTryValidate(message: String) {
-        givenALongitude()
+    @Test
+    fun latitudeWithEastCardinalPointThrowsException() {
+        givenALatitude(cardinalPoint = CardinalPoint.EAST)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, latitudeCardinalPointCanNotBeEast)
+    }
+
+    @Test
+    fun latitudeWithWestCardinalPointThrowsException() {
+        givenALatitude(cardinalPoint = CardinalPoint.WEST)
+        thenExpectedExceptionWhenTryValidate({ givenALongitude() }, latitudeCardinalPointCanNotBeWest)
+    }
+
+    @Test
+    fun longitudeDegreeNullThrowsException() {
+        givenALongitude(degree = null)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeDegreeCanNotBeNull)
+    }
+
+    @Test
+    fun longitudeDegreeLowerThan0ThrowsException() {
+        givenALongitude(degree = -1)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeDegreeCanNotLowerThanZero)
+    }
+
+    @Test
+    fun longitudeDegreeHigherThan180ThrowsException() {
+        givenALongitude(degree = 180)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeDegreeCanNotHigherThanOneHundredEighteen)
+    }
+
+    @Test
+    fun longitudeMinuteNullThrowsException() {
+        givenALongitude(minute = null)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeMinuteCanNotBeNull)
+    }
+
+    @Test
+    fun longitudeMinuteLowerThan0ThrowsException() {
+        givenALongitude(minute = -1)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeMinuteCanNotLower0)
+    }
+
+    @Test
+    fun longitudeMinuteHigherOrEqualsThan60ThrowsException() {
+        givenALongitude(minute = 60)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeMinuteCanNotHigherOrEqualsThan60)
+    }
+
+    @Test
+    fun longitudeSecondNullThrowsException() {
+        givenALongitude(second = null)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeSecondCanNotNull)
+    }
+
+    @Test
+    fun longitudeSecondsLowerThan0ThrowsException() {
+        givenALongitude(second = -0.1f)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeSecondCanNotLowerThan0)
+    }
+
+    @Test
+    fun longitudeSecondsHigherOrEqualsThan60ThrowsException() {
+        givenALongitude(second = 60f)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeSecondCanNotHigherOrEqualsThan60)
+    }
+
+    @Test
+    fun longitudeWithNullCardinalPointThrowsException() {
+        givenALongitude(cardinalPoint = null)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeCardinalPointCanNotBeNull)
+    }
+
+    @Test
+    fun longitudeWithNorthCardinalPointThrowsException() {
+        givenALongitude(cardinalPoint = CardinalPoint.NORTH)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeCardinalPointCanNotBeNorth)
+    }
+
+    @Test
+    fun longitudeWithSouthCardinalPointThrowsException() {
+        givenALongitude(cardinalPoint = CardinalPoint.SOUTH)
+        thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeCardinalPointCanNotBeSouth)
+    }
+
+    private fun thenExpectedExceptionWhenTryValidate(validCoordinate: () -> Unit, message: String) {
+        validCoordinate.invoke()
         givenACoordinates()
 
         whenTryValidate()
 
         thenThrowsExceptionWithMessage(message)
     }
-
-    @Test
-    fun longitudeDegreeNullThrowsException() {
-        givenALongitude(degree = null)
-        givenALatitude()
-        givenACoordinates()
-
-        whenTryValidate()
-        thenThrowsExceptionWithMessage(longitudeDegreeCanNotBeNull)
-    }
-
-    @Test
-    fun longitudeDegreeLowerThan0ThrowsException() {
-        givenALongitude(degree = -1)
-        givenALatitude()
-        givenACoordinates()
-
-        whenTryValidate()
-        thenThrowsExceptionWithMessage(longitudeDegreeCanNotLowerThanZero)
-    }
-
-    @Test
-    fun longitudeDegreeHigherThan180ThrowsException() {
-        givenALongitude(degree = 180)
-        givenALatitude()
-        givenACoordinates()
-
-        whenTryValidate()
-        thenThrowsExceptionWithMessage(longitudeDegreeCanNotHigherThanOneHundredEighteen)
-    }
-
-    @Test
-    fun longitudeMinuteNullThrowsException() {
-        givenALongitude(minute = null)
-        givenALatitude()
-        givenACoordinates()
-
-        whenTryValidate()
-        thenThrowsExceptionWithMessage(longitudeMinuteCanNotBeNull)
-    }
-
-    @Test
-    fun longitudeMinuteLowerThan0ThrowsException() {
-        givenALongitude(minute = -1)
-        givenALatitude()
-        givenACoordinates()
-
-        whenTryValidate()
-        thenThrowsExceptionWithMessage(longitudeMinuteCanNotLower0)
-    }
-
-    @Test
-    fun longitudeMinuteHigherOrEqualsThan60ThrowsException() {
-        givenALongitude(minute = 60)
-        givenALatitude()
-        givenACoordinates()
-
-        whenTryValidate()
-        thenThrowsExceptionWithMessage(longitudeMinuteCanNotHigherOrEqualsThan60)
-    }
-
-    @Test
-    fun longitudeSecondNullThrowsException() {
-        givenALongitude(second = null)
-        givenALatitude()
-        givenACoordinates()
-
-        whenTryValidate()
-        thenThrowsExceptionWithMessage(longitudeSecondCanNotNull)
-    }
-
-    @Test
-    fun longitudeSecondsLowerThan0ThrowsException() {
-        givenALongitude(second = -0.1f)
-        givenALatitude()
-        givenACoordinates()
-
-        whenTryValidate()
-        thenThrowsExceptionWithMessage(longitudeSecondCanNotLowerThan0)
-    }
-
-    @Test
-    fun longitudeSecondsHigherOrEqualsThan60ThrowsException() {
-        givenALongitude(second = 60f)
-        givenALatitude()
-        givenACoordinates()
-
-        whenTryValidate()
-        thenThrowsExceptionWithMessage(longitudeSecondCanNotHigherOrEqualsThan60)
-    }
-
-    /*@Test
-    fun latitudeWithEastCardinalPointThrowsException(){
-        fail()
-    }
-
-    @Test
-    fun latitudeWithWestCardinalPointThrowsException(){
-        fail()
-    }
-
-    @Test
-    fun longitudeWithNullCardinalPointThrowsException(){
-        fail()
-    }
-
-    @Test
-    fun longitudeWithNorthCardinalPointThrowsException(){
-        fail()
-    }
-
-    @Test
-    fun longitudeWithSouthCardinalPointThrowsException(){
-        fail()
-    }*/
 
     private fun thenThrowsExceptionWithMessage(message: String) {
         Assert.assertNotNull(exception)
@@ -261,12 +228,12 @@ class CoordinateValidatorTest {
 
 
     private fun givenALongitude(degree: Int? = this.degree, minute: Int? = this.minute,
-                                second: Float? = this.second, cardinalPoint: CardinalPoint = east) {
+                                second: Float? = this.second, cardinalPoint: CardinalPoint? = east) {
         longitude = CoordinateDto(degree, minute, second, cardinalPoint)
     }
 
     private fun givenALatitude(degree: Int? = this.degree, minute: Int? = this.minute,
-                               second: Float? = this.second, cardinalPoint: CardinalPoint = south) {
+                               second: Float? = this.second, cardinalPoint: CardinalPoint? = south) {
         latitude = CoordinateDto(degree, minute, second, cardinalPoint)
     }
 

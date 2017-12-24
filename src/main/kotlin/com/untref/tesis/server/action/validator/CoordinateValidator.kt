@@ -1,5 +1,6 @@
 package com.untref.tesis.server.action.validator
 
+import com.untref.tesis.server.domain.CardinalPoint
 import com.untref.tesis.server.domain.Coordinate
 import com.untref.tesis.server.domain.Coordinates
 import com.untref.tesis.server.resource.dto.CoordinateDto
@@ -25,14 +26,18 @@ class CoordinateValidator {
             val longitude = checkNotNull(longitudeDto, longitudeCanNotBeNull)
             val degree = checkNotNull(longitude.degree, longitudeDegreeCanNotBeNull)
             val minute = checkNotNull(longitude.minute, longitudeMinuteCanNotBeNull)
-            val second = checkNotNull(longitude.second, longitudeSecondCanNotNull )
+            val second = checkNotNull(longitude.second, longitudeSecondCanNotNull)
+            val cardinalPoint = checkNotNull(longitude.cardinalPoint, longitudeCardinalPointCanNotBeNull)
+
             if (degree < 0) throw RuntimeException(longitudeDegreeCanNotLowerThanZero)
             if (degree >= 180) throw RuntimeException(longitudeDegreeCanNotHigherThanOneHundredEighteen)
             if (minute < 0) throw RuntimeException(longitudeMinuteCanNotLowerZero)
             if (minute >= 60) throw RuntimeException(longitudeMinuteCanNotHigherOrEqualsThan60)
-            if(second < 0) throw RuntimeException(longitudeSecondCanNotLowerThan0)
-            if(second >=60) throw RuntimeException(longitudeSecondCanNotHigherOrEqualsThan60)
-            return Coordinate(degree, minute, second, longitude.cardinalPoint!!)
+            if (second < 0) throw RuntimeException(longitudeSecondCanNotLowerThan0)
+            if (second >= 60) throw RuntimeException(longitudeSecondCanNotHigherOrEqualsThan60)
+            if (cardinalPoint == CardinalPoint.NORTH) throw RuntimeException(longitudeCardinalPointCanNotBeNorth)
+            if (cardinalPoint == CardinalPoint.SOUTH) throw RuntimeException(longitudeCardinalPointCanNotBeSouth)
+            return Coordinate(degree, minute, second, cardinalPoint)
         }
     }
 }
