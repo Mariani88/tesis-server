@@ -2,6 +2,7 @@ package com.untref.tesis.server.unit.action
 
 import com.untref.tesis.server.action.validator.*
 import com.untref.tesis.server.domain.CardinalPoint
+import com.untref.tesis.server.domain.Coordinates
 import com.untref.tesis.server.resource.dto.CoordinateDto
 import com.untref.tesis.server.resource.dto.CoordinatesDto
 import org.junit.Assert
@@ -10,6 +11,7 @@ import org.junit.Test
 class CoordinateValidatorTest {
 
     private lateinit var coordinatesDto: CoordinatesDto
+    private lateinit var validCoordinates: Coordinates
     private var exception: Exception? = null
     private var latitude: CoordinateDto? = null
     private var longitude: CoordinateDto? = null
@@ -173,6 +175,28 @@ class CoordinateValidatorTest {
         thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeCardinalPointCanNotBeSouth)
     }
 
+    @Test
+    fun validValuesShouldReturnCoordinates() {
+        givenALatitude()
+        givenALongitude()
+        givenACoordinates()
+        whenTryValidate()
+        thenRetrieveCoordinates()
+    }
+
+    private fun thenRetrieveCoordinates() {
+        val latitude = validCoordinates.latitude
+        val longitude = validCoordinates.longitude
+        Assert.assertEquals(this.latitude?.degree, latitude.degree)
+        Assert.assertEquals(this.latitude?.minute, latitude.minute)
+        Assert.assertEquals(this.latitude?.second, latitude.second)
+        Assert.assertEquals(this.latitude?.cardinalPoint, latitude.cardinalPoint)
+        Assert.assertEquals(this.longitude?.degree, longitude.degree)
+        Assert.assertEquals(this.longitude?.minute, longitude.minute)
+        Assert.assertEquals(this.longitude?.second, longitude.second)
+        Assert.assertEquals(this.longitude?.cardinalPoint, longitude.cardinalPoint)
+    }
+
     private fun thenExpectedExceptionWhenTryValidate(validCoordinate: () -> Unit, message: String) {
         validCoordinate.invoke()
         givenACoordinates()
@@ -204,7 +228,7 @@ class CoordinateValidatorTest {
 
     private fun whenTryValidate() {
         try {
-            CoordinateValidator.validate(coordinatesDto)
+            validCoordinates = CoordinateValidator.validate(coordinatesDto)
         } catch (e: RuntimeException) {
             exception = e
         }
