@@ -66,100 +66,65 @@ class CoordinateValidatorTest {
     @Test
     fun latitudeDegreeWithNullValueThrowsException() {
         givenALatitude(degree = null)
-        givenALongitude()
-        givenACoordinates()
-
-        whenTryValidate()
-
-        thenThrowsExceptionWithMessage(degreeCanNotBeNull)
+        thenExpectedExceptionWhenTryValidate(degreeCanNotBeNull)
     }
 
     @Test
     fun latitudeDegreeLowerThan0ThrowsException() {
         givenALatitude(degree = -1)
-        givenALongitude()
-        givenACoordinates()
-
-        whenTryValidate()
-
-        thenThrowsExceptionWithMessage(degreeCanNotBeLowerThan0)
+        thenExpectedExceptionWhenTryValidate(degreeCanNotBeLowerThan0)
     }
 
     @Test
     fun latitudeDegreeHigherThan90ThrowsException() {
         givenALatitude(degree = 91)
-        givenALongitude()
-        givenACoordinates()
-
-        whenTryValidate()
-
-        thenThrowsExceptionWithMessage(degreeCanNotBeHigherThan90ForLatitude)
+        thenExpectedExceptionWhenTryValidate(degreeCanNotBeHigherThan90ForLatitude)
     }
 
     @Test
     fun latitudeMinuteNullThrowsException() {
         givenALatitude(minute = null)
-        givenALongitude()
-        givenACoordinates()
-
-        whenTryValidate()
-
-        thenThrowsExceptionWithMessage(minuteCanNotBeNull)
+        thenExpectedExceptionWhenTryValidate(minuteCanNotBeNull)
     }
 
     @Test
     fun latitudeMinuteLowerThan0ThrowsException() {
         givenALatitude(minute = -1)
-        givenALongitude()
-        givenACoordinates()
-
-        whenTryValidate()
-
-        thenThrowsExceptionWithMessage(minuteCanNotLowerThanZero)
+        thenExpectedExceptionWhenTryValidate(minuteCanNotLowerThanZero)
     }
 
     @Test
     fun latitudeMinuteHigherOrEqualsThan60ThrowsException() {
         givenALatitude(minute = 60)
-        givenALongitude()
-        givenACoordinates()
-
-        whenTryValidate()
-
-        thenThrowsExceptionWithMessage(minuteCanNotHigherOrEqualsThanSixteen)
+        thenExpectedExceptionWhenTryValidate(minuteCanNotHigherOrEqualsThanSixteen)
     }
 
     @Test
     fun secondWithNullValueThrowsException() {
         givenALatitude(second = null)
-        givenALongitude()
-        givenACoordinates()
-
-        whenTryValidate()
-
-        thenThrowsExceptionWithMessage(secondCanNotBeNull)
+        thenExpectedExceptionWhenTryValidate(secondCanNotBeNull)
     }
 
     @Test
     fun latitudeSecondsLowerThan0ThrowsException() {
         givenALatitude(second = -0.01f)
-        givenALongitude()
-        givenACoordinates()
-
-        whenTryValidate()
-
-        thenThrowsExceptionWithMessage(secondCanNotBeLowerThanZero)
+        thenExpectedExceptionWhenTryValidate(secondCanNotBeLowerThanZero)
     }
 
     @Test
     fun latitudeSecondsHigherOrEqualsThan60ThrowsException() {
         givenALatitude(second = 60f)
+        thenExpectedExceptionWhenTryValidate(secondCanNotBeHigherOrEqualsThanSixteen)
+    }
+
+
+    private fun thenExpectedExceptionWhenTryValidate(message: String){
         givenALongitude()
         givenACoordinates()
 
         whenTryValidate()
 
-        thenThrowsExceptionWithMessage(secondCanNotBeHigherOrEqualsThanSixteen)
+        thenThrowsExceptionWithMessage(message)
     }
 
     @Test
