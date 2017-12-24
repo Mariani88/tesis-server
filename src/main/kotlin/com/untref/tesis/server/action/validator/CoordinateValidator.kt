@@ -1,43 +1,13 @@
 package com.untref.tesis.server.action.validator
 
-import com.untref.tesis.server.domain.CardinalPoint
-import com.untref.tesis.server.domain.Coordinate
 import com.untref.tesis.server.domain.Coordinates
-import com.untref.tesis.server.resource.dto.CoordinateDto
 import com.untref.tesis.server.resource.dto.CoordinatesDto
-import utils.checkNotNull
 
-class CoordinateValidator {
+class CoordinateValidator(private val latitudeValidator: LatitudeValidator, private val longitudeValidator: LongitudeValidator) {
 
-
-    companion object {
-        private val latitudeValidator = LatitudeValidator()
-
-        fun validate(coordinatesDto: CoordinatesDto): Coordinates {
-            val latitude = latitudeValidator.validate(coordinatesDto.latitude)
-            val longitude = validateLongitude(coordinatesDto.longitude)
-
-
-
-            return Coordinates(latitude, longitude)
-        }
-
-        private fun validateLongitude(longitudeDto: CoordinateDto?): Coordinate {
-            val longitude = checkNotNull(longitudeDto, longitudeCanNotBeNull)
-            val degree = checkNotNull(longitude.degree, longitudeDegreeCanNotBeNull)
-            val minute = checkNotNull(longitude.minute, longitudeMinuteCanNotBeNull)
-            val second = checkNotNull(longitude.second, longitudeSecondCanNotNull)
-            val cardinalPoint = checkNotNull(longitude.cardinalPoint, longitudeCardinalPointCanNotBeNull)
-
-            if (degree < 0) throw RuntimeException(longitudeDegreeCanNotLowerThanZero)
-            if (degree >= 180) throw RuntimeException(longitudeDegreeCanNotHigherThanOneHundredEighteen)
-            if (minute < 0) throw RuntimeException(longitudeMinuteCanNotLowerZero)
-            if (minute >= 60) throw RuntimeException(longitudeMinuteCanNotHigherOrEqualsThan60)
-            if (second < 0) throw RuntimeException(longitudeSecondCanNotLowerThan0)
-            if (second >= 60) throw RuntimeException(longitudeSecondCanNotHigherOrEqualsThan60)
-            if (cardinalPoint == CardinalPoint.NORTH) throw RuntimeException(longitudeCardinalPointCanNotBeNorth)
-            if (cardinalPoint == CardinalPoint.SOUTH) throw RuntimeException(longitudeCardinalPointCanNotBeSouth)
-            return Coordinate(degree, minute, second, cardinalPoint)
-        }
+    fun validate(coordinatesDto: CoordinatesDto): Coordinates {
+        val latitude = latitudeValidator.validate(coordinatesDto.latitude)
+        val longitude = longitudeValidator.validate(coordinatesDto.longitude)
+        return Coordinates(latitude, longitude)
     }
 }

@@ -6,6 +6,7 @@ import com.untref.tesis.server.domain.Coordinates
 import com.untref.tesis.server.resource.dto.CoordinateDto
 import com.untref.tesis.server.resource.dto.CoordinatesDto
 import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
 
 class CoordinateValidatorTest {
@@ -20,6 +21,12 @@ class CoordinateValidatorTest {
     private val second = 23.4f
     private val east = CardinalPoint.EAST
     private val south = CardinalPoint.SOUTH
+    private lateinit var coordinatesValidator: CoordinateValidator
+
+    @Before
+    fun setUp() {
+        coordinatesValidator = CoordinateValidator(LatitudeValidator(), LongitudeValidator())
+    }
 
     @Test
     fun latitudeCanNotBeNull() {
@@ -44,8 +51,8 @@ class CoordinateValidatorTest {
     }
 
     @Test
-    fun latitudeDegreeHigherThan90ThrowsException() {
-        givenALatitude(degree = 91)
+    fun latitudeDegreeHigherOrEqualsThan90ThrowsException() {
+        givenALatitude(degree = 90)
         thenExpectedExceptionWhenTryValidate({ givenALongitude() }, degreeCanNotBeHigherThan90ForLatitude)
     }
 
@@ -228,7 +235,7 @@ class CoordinateValidatorTest {
 
     private fun whenTryValidate() {
         try {
-            validCoordinates = CoordinateValidator.validate(coordinatesDto)
+            validCoordinates = coordinatesValidator.validate(coordinatesDto)
         } catch (e: RuntimeException) {
             exception = e
         }
