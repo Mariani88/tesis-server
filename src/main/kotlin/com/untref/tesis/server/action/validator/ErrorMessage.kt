@@ -14,3 +14,6 @@ val secondCanNotBeHigherOrEqualsThanSixty = "second can not be higher or equals 
 val longitudeDegreeCanNotBeNull = "longitude degree can not be null"
 val longitudeDegreeCanNotLowerThanZero = "longitude degree can not lower than 0"
 val longitudeDegreeCanNotHigherThanOneHundredEighteen = "longitude degree can not higher  than one hundred eighteen"
+val longitudeMinuteCanNotBeNull = "longitude minute can not be null"
+val longitudeMinuteCanNotLowerZero = "longitude minute can not lower than 0"
+val longitudeMinuteCanNotHigherOrEqualsThan60 = "longitude minute can not higher or equals than 60"

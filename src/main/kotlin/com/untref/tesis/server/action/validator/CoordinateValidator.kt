@@ -15,14 +15,23 @@ class CoordinateValidator {
         fun validate(coordinatesDto: CoordinatesDto): Coordinates {
             val latitude = latitudeValidator.validate(coordinatesDto.latitude)
             val longitude = validateLongitude(coordinatesDto.longitude)
+
+
+
             return Coordinates(latitude, longitude)
         }
 
         private fun validateLongitude(longitudeDto: CoordinateDto?): Coordinate {
             val longitude = checkNotNull(longitudeDto, longitudeCanNotBeNull)
             val degree = checkNotNull(longitude.degree, longitudeDegreeCanNotBeNull)
-            if(degree < 0) throw RuntimeException(longitudeDegreeCanNotLowerThanZero)
-            if(degree>=180) throw RuntimeException(longitudeDegreeCanNotHigherThanOneHundredEighteen)
+            val minute = checkNotNull(longitude.minute, longitudeMinuteCanNotBeNull)
+
+            if (degree < 0) throw RuntimeException(longitudeDegreeCanNotLowerThanZero)
+            if (degree >= 180) throw RuntimeException(longitudeDegreeCanNotHigherThanOneHundredEighteen)
+            if (minute < 0) throw RuntimeException(longitudeMinuteCanNotLowerZero)
+            if (minute >= 60) throw RuntimeException(longitudeMinuteCanNotHigherOrEqualsThan60)
+
+
             return Coordinate(longitude.degree!!, longitude.minute!!, longitude.second!!, longitude.cardinalPoint!!)
         }
     }
