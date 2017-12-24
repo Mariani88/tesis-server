@@ -25,14 +25,14 @@ class CoordinateValidator {
             val longitude = checkNotNull(longitudeDto, longitudeCanNotBeNull)
             val degree = checkNotNull(longitude.degree, longitudeDegreeCanNotBeNull)
             val minute = checkNotNull(longitude.minute, longitudeMinuteCanNotBeNull)
-
+            val second = checkNotNull(longitude.second, longitudeSecondCanNotNull )
             if (degree < 0) throw RuntimeException(longitudeDegreeCanNotLowerThanZero)
             if (degree >= 180) throw RuntimeException(longitudeDegreeCanNotHigherThanOneHundredEighteen)
             if (minute < 0) throw RuntimeException(longitudeMinuteCanNotLowerZero)
             if (minute >= 60) throw RuntimeException(longitudeMinuteCanNotHigherOrEqualsThan60)
-
-
-            return Coordinate(longitude.degree!!, longitude.minute!!, longitude.second!!, longitude.cardinalPoint!!)
+            if(second < 0) throw RuntimeException(longitudeSecondCanNotLowerThan0)
+            if(second >=60) throw RuntimeException(longitudeSecondCanNotHigherOrEqualsThan60)
+            return Coordinate(degree, minute, second, longitude.cardinalPoint!!)
         }
     }
 }

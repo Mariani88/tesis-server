@@ -17,6 +17,7 @@ class LatitudeValidator {
         if (minute >= 60) throw RuntimeException(minuteCanNotHigherOrEqualsThanSixteen)
         if (second < 0) throw RuntimeException(secondCanNotBeLowerThanZero)
         if (second >= 60) throw RuntimeException(secondCanNotBeHigherOrEqualsThanSixty)
+
         return Coordinate(degree, minute, second, latitudeDto?.cardinalPoint!!)
     }
 }
