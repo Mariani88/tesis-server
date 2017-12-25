@@ -1,6 +1,7 @@
 package com.untref.tesis.server.unit.action
 
 import com.untref.tesis.server.action.validator.*
+import com.untref.tesis.server.builders.*
 import com.untref.tesis.server.domain.CardinalPoint
 import com.untref.tesis.server.domain.Coordinates
 import com.untref.tesis.server.resource.dto.CoordinateDto
@@ -16,11 +17,6 @@ class CoordinateValidatorTest {
     private var exception: Exception? = null
     private var latitude: CoordinateDto? = null
     private var longitude: CoordinateDto? = null
-    private val degree = 30
-    private val minute = 50
-    private val second = 23.4f
-    private val east = CardinalPoint.EAST
-    private val south = CardinalPoint.SOUTH
     private lateinit var coordinatesValidator: CoordinateValidator
 
     @Before
@@ -222,15 +218,14 @@ class CoordinateValidatorTest {
         coordinatesDto = CoordinatesDto(latitude, longitude)
     }
 
-
-    private fun givenALongitude(degree: Int? = this.degree, minute: Int? = this.minute,
-                                second: Float? = this.second, cardinalPoint: CardinalPoint? = east) {
-        longitude = CoordinateDto(degree, minute, second, cardinalPoint)
+    private fun givenALongitude(degree: Int? = defaultDegree, minute: Int? = defaultMinute,
+                                second: Float? = defaultSecond, cardinalPoint: CardinalPoint? = east) {
+        longitude = createLongitude(degree, minute, second, cardinalPoint)
     }
 
-    private fun givenALatitude(degree: Int? = this.degree, minute: Int? = this.minute,
-                               second: Float? = this.second, cardinalPoint: CardinalPoint? = south) {
-        latitude = CoordinateDto(degree, minute, second, cardinalPoint)
+    private fun givenALatitude(degree: Int? = defaultDegree, minute: Int? = defaultMinute,
+                               second: Float? = defaultSecond, cardinalPoint: CardinalPoint? = south) {
+        latitude = createLatitude(degree, minute, second, cardinalPoint)
     }
 
     private fun whenTryValidate() {

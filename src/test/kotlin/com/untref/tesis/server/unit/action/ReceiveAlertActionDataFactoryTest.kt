@@ -1,64 +1,115 @@
 package com.untref.tesis.server.unit.action
 
-import com.untref.tesis.server.action.ReceiveAlertActionDataFactory
+import com.untref.tesis.server.action.ReceiveAlertActionData
+import com.untref.tesis.server.action.factory.*
+import com.untref.tesis.server.action.validator.CoordinateValidator
+import com.untref.tesis.server.action.validator.LatitudeValidator
+import com.untref.tesis.server.action.validator.LongitudeValidator
+import com.untref.tesis.server.builders.*
+import com.untref.tesis.server.domain.CardinalPoint
+import com.untref.tesis.server.domain.Coordinate
 import com.untref.tesis.server.domain.DetectionMethod
 import com.untref.tesis.server.resource.dto.CoordinatesDto
 import com.untref.tesis.server.resource.dto.FireAlertDto
-import org.junit.Assert.fail
-import org.junit.Rule
+import org.junit.Assert
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Before
 import org.junit.Test
-import org.junit.rules.ExpectedException
 
 class ReceiveAlertActionDataFactoryTest {
 
     private lateinit var fireAlertDto: FireAlertDto
-    private val temperature = 30f
-    private val gas = 400f
-    private val detectionMethods = listOf(DetectionMethod.FIRE)
-    private lateinit var coordinates: CoordinatesDto
+    private var exception: RuntimeException? = null
+    private lateinit var receiveAlertActionDataFactory: ReceiveAlertActionDataFactory
+    private var receiveAlertActionData: ReceiveAlertActionData? = null
 
-    @JvmField
-    @Rule
-    val expectedException: ExpectedException = ExpectedException.none()
+    @Before
+    fun setUp() {
+        val coordinateValidator = CoordinateValidator(LatitudeValidator(), LongitudeValidator())
+        receiveAlertActionDataFactory = ReceiveAlertActionDataFactory(coordinateValidator)
+    }
 
-    /*@Test
-    fun gasCanNotNegative() {
+    @Test
+    fun negativeGasThrowException() {
+        givenFireAlertDto(gas = -1f)
+        whenTryCreateActionData()
+        thenExpectedException(gasCanNotBeNegative)
+    }
+
+    @Test
+    fun nullGasThrowsException() {
         givenFireAlertDto(gas = null)
-        thenCreateActionDateThrowsException("gas can not null")
+        whenTryCreateActionData()
+        thenExpectedException(gasCanNotBeNull)
     }
 
     @Test
-    fun gasCanNotBeNull() {
-        fail()
+    fun nullTemperatureThrowException() {
+        givenFireAlertDto(temperature = null)
+        whenTryCreateActionData()
+        thenExpectedException(temperatureCanNotBeNull)
     }
 
     @Test
-    fun temperatureCanNotBeNull() {
-        fail()
+    fun nullDetectionMethodsThrowException() {
+        givenFireAlertDto(detectionMethods = null)
+        whenTryCreateActionData()
+        thenExpectedException(detectionMethodsCanNotBeNull)
     }
 
     @Test
-    fun detectionMethodsCanNotBeNull() {
-        fail()
+    fun emptyDetectionMethodThrowException() {
+        givenFireAlertDto(detectionMethods = listOf())
+        whenTryCreateActionData()
+        thenExpectedException(detectionMethodsCanNotBeEmpty)
     }
 
     @Test
-    fun detectionMethodCanNotBeEmpty() {
-        fail()
+    fun nullCoordinatesThrowsException() {
+        givenFireAlertDto(coordinates = null)
+        whenTryCreateActionData()
+        thenExpectedException(coordinatesCanNotBeNull)
     }
 
     @Test
-    fun coordinatesCanNotBeNull() {
-        fail()
+    fun validAlertReturnActionData() {
+        givenFireAlertDto()
+        whenTryCreateActionData()
+        thenCreateActionData()
     }
 
-    private fun thenCreateActionDateThrowsException(message: String) {
-        expectedException.expect(RuntimeException::class.java)
-        expectedException.expectMessage(message)
-        ReceiveAlertActionDataFactory.create(fireAlertDto)
-    }*/
+    private fun thenCreateActionData() {
+        assertNotNull(receiveAlertActionData)
+        assertCoordinate(south, defaultDegree, defaultMinute, defaultSecond, receiveAlertActionData?.coordinates?.latitude)
+        assertCoordinate(east, defaultDegree, defaultMinute, defaultSecond, receiveAlertActionData?.coordinates?.longitude)
+        assertEquals(defaultDetectionMethods, receiveAlertActionData?.detectionMethods)
+        assertEquals(defaultTemperature, receiveAlertActionData?.temperature)
+        assertEquals(defaultGas, receiveAlertActionData?.gas)
+    }
 
-    private fun givenFireAlertDto(coordinates: CoordinatesDto? = this.coordinates, detectionMethods: List<DetectionMethod>? = this.detectionMethods,
-                                  temperature: Float? = this.temperature, gas: Float? = this.gas) = FireAlertDto(coordinates, detectionMethods,
-            temperature, gas)
+    private fun assertCoordinate(cardinalPoint: CardinalPoint, degree: Int, minute: Int, second: Float, coordinate: Coordinate?) {
+        assertEquals(cardinalPoint, coordinate?.cardinalPoint)
+        assertEquals(degree, coordinate?.degree)
+        assertEquals(minute, coordinate?.minute)
+        assertEquals(second, coordinate?.second)
+    }
+
+    private fun givenFireAlertDto(coordinates: CoordinatesDto? = createCoordinates(), detectionMethods: List<DetectionMethod>? = defaultDetectionMethods,
+                                  temperature: Float? = defaultTemperature, gas: Float? = defaultGas) {
+        fireAlertDto = createFireAlertDto(coordinates, detectionMethods, temperature, gas)
+    }
+
+    private fun thenExpectedException(errorMessage: String) {
+        Assert.assertNotNull(exception)
+        Assert.assertEquals(errorMessage, exception?.message)
+    }
+
+    private fun whenTryCreateActionData() {
+        try {
+            receiveAlertActionData = receiveAlertActionDataFactory.create(fireAlertDto)
+        } catch (e: RuntimeException) {
+            exception = e
+        }
+    }
 }
