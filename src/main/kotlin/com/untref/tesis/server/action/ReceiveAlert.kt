@@ -10,7 +10,7 @@ class ReceiveAlert(private val alertRepository: AlertRepository, private val ale
     operator fun invoke(receiveAlertActionData: ReceiveAlertActionData) {
         Single.just(alertRepository.lastId())
                 .map { buildAlert(it, receiveAlertActionData) }
-                .doOnSuccess { alertRepository.storeAlert(it) }
+                .doOnSuccess { alertRepository.store(it) }
                 .subscribe({ alertNotificationService.send(it) })
     }
 

@@ -70,7 +70,7 @@ class AlarmResourceTest {
     }
 
     private fun thenAlertIsStored() {
-        val alert = alertRepository.findById(1)
+        val alert = alertRepository.find(1)
         assertNotNull(alert)
     }
 

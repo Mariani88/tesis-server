@@ -10,7 +10,7 @@ class FileAlertRepository (private val path: String): AlertRepository {
 
     private var lastId = 1L
 
-    override fun storeAlert(alert: Alert) {
+    override fun store(alert: Alert) {
         val alerts = getAll()
         val oos = ObjectOutputStream(FileOutputStream(path))
         alerts.put(alert.id, AlertEntity.from(alert))
@@ -18,7 +18,7 @@ class FileAlertRepository (private val path: String): AlertRepository {
         lastId += 1
     }
 
-    override fun findById(alertId: Long): Alert =
+    override fun find(alertId: Long): Alert =
             Optional.ofNullable(getAll()[alertId]).map { it.toAlert() }.orElseThrow({ RuntimeException(alertNotExist(alertId)) })
 
     override fun lastId(): Long = lastId

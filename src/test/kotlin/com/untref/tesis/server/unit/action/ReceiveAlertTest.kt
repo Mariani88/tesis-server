@@ -56,7 +56,7 @@ class ReceiveAlertTest {
     }
 
     private fun thenAlertIsStored() {
-        val storedAlert = alertRepository.findById(firstId)
+        val storedAlert = alertRepository.find(firstId)
         Assert.assertEquals(storedAlert.id, firstId)
         Assert.assertEquals(storedAlert.coordinates, coordinates)
         Assert.assertEquals(storedAlert.detectionMethods, detectionMethods)

@@ -39,13 +39,13 @@ class FileAlertRepositoryTest {
     }
 
     private fun thenStoreIt() {
-        storedAlert = fileAlertRepository.findById(alertId)
+        storedAlert = fileAlertRepository.find(alertId)
         Assert.assertEquals(alert, storedAlert)
         Assert.assertEquals(alertId + 1, fileAlertRepository.lastId())
     }
 
     private fun whenStoreAlert() {
-        fileAlertRepository.storeAlert(alert)
+        fileAlertRepository.store(alert)
     }
 
     private fun givenAlert() {
