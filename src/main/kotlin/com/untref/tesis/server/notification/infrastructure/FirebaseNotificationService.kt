@@ -11,9 +11,9 @@ import org.springframework.web.client.RestTemplate
 
 class FirebaseNotificationService : AlertNotificationService {
 
-    override fun send(alert: Alert?) {
+    override fun send(alert: Alert) {
         val headers = FirebaseHeaderFactory.create()
-        val body = AlertNotificationDtoFactory.create(alert!!, "/topics/anytopic")
+        val body = AlertNotificationDtoFactory.create(alert, "/topics/anytopic")
         val restTemplate = RestTemplate()
 
         val parseMap = JacksonJsonParser().parseMap(ObjectMapper().writeValueAsString(body))
