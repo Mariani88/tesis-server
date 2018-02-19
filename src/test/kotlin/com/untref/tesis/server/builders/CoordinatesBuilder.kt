@@ -1,8 +1,8 @@
 package com.untref.tesis.server.builders
 
-import com.untref.tesis.server.domain.CardinalPoint
-import com.untref.tesis.server.domain.Coordinate
-import com.untref.tesis.server.domain.Coordinates
+import com.untref.tesis.server.alert.domain.CardinalPoint
+import com.untref.tesis.server.alert.domain.Coordinate
+import com.untref.tesis.server.alert.domain.Coordinates
 
 class CoordinatesBuilder {
 

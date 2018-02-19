@@ -1,10 +1,11 @@
 package com.untref.tesis.server.unit.action
 
-import com.untref.tesis.server.action.ReceiveAlert
-import com.untref.tesis.server.action.ReceiveAlertActionData
+import com.untref.tesis.server.alert.action.ReceiveAlert
+import com.untref.tesis.server.alert.action.ReceiveAlertActionData
 import com.untref.tesis.server.builders.CoordinatesBuilder
-import com.untref.tesis.server.domain.*
+import com.untref.tesis.server.alert.domain.*
 import com.untref.tesis.server.extensions.MockitoExtensions
+import com.untref.tesis.server.notification.domain.AlertNotificationService
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

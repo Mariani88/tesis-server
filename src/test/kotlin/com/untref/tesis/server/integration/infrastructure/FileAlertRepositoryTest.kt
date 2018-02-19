@@ -1,8 +1,8 @@
 package com.untref.tesis.server.integration.infrastructure
 
 import com.untref.tesis.server.builders.CoordinatesBuilder
-import com.untref.tesis.server.domain.*
-import com.untref.tesis.server.infrastructure.persistence.file.FileAlertRepository
+import com.untref.tesis.server.alert.domain.*
+import com.untref.tesis.server.alert.infrastructure.persistence.file.FileAlertRepository
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before

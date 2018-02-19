@@ -1,9 +1,9 @@
 package com.untref.tesis.server.unit.action
 
-import com.untref.tesis.server.action.validator.*
+import com.untref.tesis.server.alert.action.validator.*
 import com.untref.tesis.server.builders.*
-import com.untref.tesis.server.domain.CardinalPoint
-import com.untref.tesis.server.domain.Coordinates
+import com.untref.tesis.server.alert.domain.CardinalPoint
+import com.untref.tesis.server.alert.domain.Coordinates
 import com.untref.tesis.server.resource.dto.CoordinateDto
 import com.untref.tesis.server.resource.dto.CoordinatesDto
 import org.junit.Assert

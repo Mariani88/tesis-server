@@ -1,7 +1,7 @@
 package com.untref.tesis.server.resource.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.untref.tesis.server.domain.CardinalPoint
+import com.untref.tesis.server.alert.domain.CardinalPoint
 
 class CoordinateDto(
         @JsonProperty("d") val degree: Int?,

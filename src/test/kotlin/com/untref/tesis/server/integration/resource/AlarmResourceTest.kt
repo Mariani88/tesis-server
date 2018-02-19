@@ -2,9 +2,9 @@ package com.untref.tesis.server.integration.resource
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.untref.tesis.server.Application
-import com.untref.tesis.server.domain.AlertRepository
-import com.untref.tesis.server.domain.CardinalPoint
-import com.untref.tesis.server.domain.DetectionMethod
+import com.untref.tesis.server.alert.domain.AlertRepository
+import com.untref.tesis.server.alert.domain.CardinalPoint
+import com.untref.tesis.server.alert.domain.DetectionMethod
 import com.untref.tesis.server.resource.dto.CoordinateDto
 import com.untref.tesis.server.resource.dto.CoordinatesDto
 import com.untref.tesis.server.resource.dto.FireAlertDto

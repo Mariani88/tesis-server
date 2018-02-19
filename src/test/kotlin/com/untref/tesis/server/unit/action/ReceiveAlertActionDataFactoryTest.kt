@@ -1,14 +1,14 @@
 package com.untref.tesis.server.unit.action
 
-import com.untref.tesis.server.action.ReceiveAlertActionData
-import com.untref.tesis.server.action.factory.*
-import com.untref.tesis.server.action.validator.CoordinateValidator
-import com.untref.tesis.server.action.validator.LatitudeValidator
-import com.untref.tesis.server.action.validator.LongitudeValidator
+import com.untref.tesis.server.alert.action.ReceiveAlertActionData
+import com.untref.tesis.server.alert.action.factory.*
+import com.untref.tesis.server.alert.action.validator.CoordinateValidator
+import com.untref.tesis.server.alert.action.validator.LatitudeValidator
+import com.untref.tesis.server.alert.action.validator.LongitudeValidator
 import com.untref.tesis.server.builders.*
-import com.untref.tesis.server.domain.CardinalPoint
-import com.untref.tesis.server.domain.Coordinate
-import com.untref.tesis.server.domain.DetectionMethod
+import com.untref.tesis.server.alert.domain.CardinalPoint
+import com.untref.tesis.server.alert.domain.Coordinate
+import com.untref.tesis.server.alert.domain.DetectionMethod
 import com.untref.tesis.server.resource.dto.CoordinatesDto
 import com.untref.tesis.server.resource.dto.FireAlertDto
 import org.junit.Assert

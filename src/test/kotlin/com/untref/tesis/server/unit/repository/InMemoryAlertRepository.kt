@@ -1,7 +1,7 @@
 package com.untref.tesis.server.unit.repository
 
-import com.untref.tesis.server.domain.Alert
-import com.untref.tesis.server.domain.AlertRepository
+import com.untref.tesis.server.alert.domain.Alert
+import com.untref.tesis.server.alert.domain.AlertRepository
 import java.util.*
 
 class InMemoryAlertRepository : AlertRepository {

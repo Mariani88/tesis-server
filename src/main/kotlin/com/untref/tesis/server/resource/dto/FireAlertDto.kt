@@ -1,7 +1,7 @@
 package com.untref.tesis.server.resource.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.untref.tesis.server.domain.DetectionMethod
+import com.untref.tesis.server.alert.domain.DetectionMethod
 
 data class FireAlertDto(
         @JsonProperty("coor") val coordinates: CoordinatesDto?,
