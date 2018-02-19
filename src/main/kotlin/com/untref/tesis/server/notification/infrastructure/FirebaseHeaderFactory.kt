@@ -1,4 +1,4 @@
-package com.untref.tesis.server.notification.sevice
+package com.untref.tesis.server.notification.infrastructure
 
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType

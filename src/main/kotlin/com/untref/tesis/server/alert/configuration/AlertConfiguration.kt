@@ -4,7 +4,7 @@ import com.untref.tesis.server.alert.action.ReceiveAlert
 import com.untref.tesis.server.notification.domain.AlertNotificationService
 import com.untref.tesis.server.alert.domain.AlertRepository
 import com.untref.tesis.server.alert.infrastructure.persistence.file.FileAlertRepository
-import com.untref.tesis.server.notification.sevice.FirebaseNotificationService
+import com.untref.tesis.server.notification.infrastructure.FirebaseNotificationService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

@@ -1,9 +1,9 @@
-package com.untref.tesis.server.notification.sevice
+package com.untref.tesis.server.notification.infrastructure
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.untref.tesis.server.alert.domain.Alert
 import com.untref.tesis.server.notification.domain.AlertNotificationService
-import com.untref.tesis.server.notification.dto.AlertNotificationDtoFactory
+import com.untref.tesis.server.notification.dto.factory.AlertNotificationDtoFactory
 import org.springframework.boot.json.JacksonJsonParser
 import org.springframework.http.HttpEntity
 import org.springframework.web.client.HttpClientErrorException
