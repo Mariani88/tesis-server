@@ -13,7 +13,7 @@ class FileAlertRepository (private val path: String): AlertRepository {
     override fun store(alert: Alert) {
         val alerts = getAll()
         val oos = ObjectOutputStream(FileOutputStream(path))
-        alerts.put(alert.id, AlertEntity.from(alert))
+        alerts[alert.id] = AlertEntity.from(alert)
         tryExecute({ oos.writeObject(alerts) }, { oos.close() }, canNotStore())
         lastId += 1
     }
