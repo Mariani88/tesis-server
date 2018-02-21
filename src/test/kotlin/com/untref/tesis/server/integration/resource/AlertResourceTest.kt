@@ -28,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest(classes = [Application::class])
 @WebAppConfiguration
-class AlarmResourceTest {
+class AlertResourceTest {
 
     @Autowired
     private lateinit var webApplicationContext: WebApplicationContext

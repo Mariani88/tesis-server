@@ -5,7 +5,7 @@ import com.untref.tesis.server.alert.action.factory.ReceiveAlertActionDataFactor
 import com.untref.tesis.server.alert.action.validator.CoordinateValidator
 import com.untref.tesis.server.alert.action.validator.LatitudeValidator
 import com.untref.tesis.server.alert.action.validator.LongitudeValidator
-import com.untref.tesis.server.resource.AlarmResource
+import com.untref.tesis.server.resource.AlertResource
 import org.springframework.beans.factory.config.BeanDefinition
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -16,8 +16,8 @@ class RestConfiguration {
 
     @Bean
     @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-    fun alarmResource(receiveAlert: ReceiveAlert, receiveAlertActionDataFactory: ReceiveAlertActionDataFactory): AlarmResource =
-            AlarmResource(receiveAlert, receiveAlertActionDataFactory)
+    fun alertResource(receiveAlert: ReceiveAlert, receiveAlertActionDataFactory: ReceiveAlertActionDataFactory): AlertResource =
+            AlertResource(receiveAlert, receiveAlertActionDataFactory)
 
     @Bean
     fun receiveAlertActionDataFactory(coordinateValidator: CoordinateValidator): ReceiveAlertActionDataFactory

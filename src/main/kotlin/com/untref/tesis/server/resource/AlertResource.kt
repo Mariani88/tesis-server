@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController
-class AlarmResource(private val receiveAlert: ReceiveAlert, private val receiveAlertActionDataFactory: ReceiveAlertActionDataFactory) {
+class AlertResource(private val receiveAlert: ReceiveAlert, private val receiveAlertActionDataFactory: ReceiveAlertActionDataFactory) {
 
     @PostMapping("/alert")
     fun receiveAlert(@RequestBody fireAlertDto: FireAlertDto): ReceivedAlertDto {
