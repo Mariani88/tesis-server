@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.untref.tesis.server.alert.domain.CardinalPoint
 
 class CoordinateDto(
-
-        @get:JsonProperty("d") val degree: Int?,
-        @get:JsonProperty("m") val minute: Int?,
-        @get:JsonProperty("s") val second: Float?,
-        @get:JsonProperty("cp") val cardinalPoint: CardinalPoint?
+        @get:JsonProperty("degree") val degree: Int?,
+        @get:JsonProperty("minute") val minute: Int?,
+        @get:JsonProperty("second") val second: Double?,
+        @get:JsonProperty("cardinal_point") val cardinalPoint: CardinalPoint?
 )

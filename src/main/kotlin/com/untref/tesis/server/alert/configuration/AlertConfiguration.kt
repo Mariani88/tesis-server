@@ -5,6 +5,7 @@ import com.untref.tesis.server.notification.domain.AlertNotificationService
 import com.untref.tesis.server.alert.domain.AlertRepository
 import com.untref.tesis.server.alert.infrastructure.persistence.file.FileAlertRepository
 import com.untref.tesis.server.notification.infrastructure.FirebaseNotificationService
+import com.untref.tesis.server.notification.infrastructure.TARGET
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -17,7 +18,7 @@ class AlertConfiguration {
     fun alertRepository(): AlertRepository = FileAlertRepository(path)
 
     @Bean
-    fun alertNotificationService(): AlertNotificationService = FirebaseNotificationService()
+    fun alertNotificationService(): AlertNotificationService = FirebaseNotificationService(TARGET)
 
     @Bean
     fun receiveAlert(alertRepository: AlertRepository, alertNotificationService: AlertNotificationService): ReceiveAlert =

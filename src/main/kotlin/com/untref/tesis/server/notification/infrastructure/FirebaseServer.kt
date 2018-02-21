@@ -5,3 +5,5 @@ const val SERVER_KEY =
                 "-Je4zO0zqdaCP7jYARuXt"
 
 const val URL = "https://fcm.googleapis.com/fcm/send"
+
+const val TARGET = "/topics/anytopic"

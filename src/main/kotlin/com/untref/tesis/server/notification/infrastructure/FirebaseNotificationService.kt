@@ -9,15 +9,15 @@ import org.springframework.http.HttpEntity
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 
-class FirebaseNotificationService : AlertNotificationService {
+class FirebaseNotificationService(private val target: String) : AlertNotificationService {
 
     override fun send(alert: Alert) {
         val headers = FirebaseHeaderFactory.create()
-        val body = AlertNotificationDtoFactory.create(alert, "/topics/anytopic")
+        val body = AlertNotificationDtoFactory.create(alert, target)
         val restTemplate = RestTemplate()
 
-        val parseMap = JacksonJsonParser().parseMap(ObjectMapper().writeValueAsString(body))
-        val request = HttpEntity<MutableMap<String, Any>>(parseMap, headers)
+        val bodyAsMap = JacksonJsonParser().parseMap(ObjectMapper().writeValueAsString(body))
+        val request = HttpEntity<MutableMap<String, Any>>(bodyAsMap, headers)
 
         //TODO contemplar el caso de 200 pero con falla
         try {

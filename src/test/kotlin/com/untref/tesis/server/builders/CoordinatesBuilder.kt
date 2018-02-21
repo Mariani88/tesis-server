@@ -8,18 +8,18 @@ class CoordinatesBuilder {
 
     companion object {
 
-        private val defaultDegree = 57
-        private val defaultMinutes = 34
-        private val defaultSeconds = 23.1f
+        private const val defaultDegree = 57
+        private const val defaultMinutes = 34
+        private const val defaultSeconds = 23.1
         private val defaultLongitudeCardinalPoint = CardinalPoint.EAST
         private val defaultLatitudeCardinalPoint = CardinalPoint.SOUTH
 
         fun createCoordinates() = Coordinates(createLatitude(), createLongitude())
 
-        private fun createLongitude(degree: Int = defaultDegree, minutes: Int = defaultMinutes, seconds: Float = defaultSeconds, cardinalPoint:
+        private fun createLongitude(degree: Int = defaultDegree, minutes: Int = defaultMinutes, seconds: Double = defaultSeconds, cardinalPoint:
             CardinalPoint = defaultLongitudeCardinalPoint) = Coordinate(degree, minutes, seconds, cardinalPoint)
 
-        private fun createLatitude(degree: Int = defaultDegree, minutes: Int = defaultMinutes, seconds: Float = defaultSeconds, cardinalPoint:
+        private fun createLatitude(degree: Int = defaultDegree, minutes: Int = defaultMinutes, seconds: Double = defaultSeconds, cardinalPoint:
         CardinalPoint = defaultLatitudeCardinalPoint) = Coordinate(degree, minutes, seconds, cardinalPoint)
     }
 }

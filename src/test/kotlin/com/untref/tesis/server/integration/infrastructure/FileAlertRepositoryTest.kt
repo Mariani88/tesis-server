@@ -8,6 +8,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import java.io.File
+import java.util.*
 
 class FileAlertRepositoryTest {
 
@@ -19,6 +20,7 @@ class FileAlertRepositoryTest {
     private val detectionMethods = listOf(DetectionMethod.FIRE)
     private val temperature = 40f
     private val gas = 430f
+    private val date = Date()
     private val path = "alertsTest.dat"
 
     @Before
@@ -49,6 +51,6 @@ class FileAlertRepositoryTest {
     }
 
     private fun givenAlert() {
-        alert = Alert(alertId, coordinates, detectionMethods, temperature, gas)
+        alert = Alert(alertId, coordinates, detectionMethods, temperature, gas, date)
     }
 }

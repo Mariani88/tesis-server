@@ -4,6 +4,7 @@ import com.untref.tesis.server.alert.domain.Alert
 import com.untref.tesis.server.notification.domain.AlertNotificationService
 import com.untref.tesis.server.alert.domain.AlertRepository
 import rx.Single
+import java.util.*
 
 class ReceiveAlert(private val alertRepository: AlertRepository, private val alertNotificationService: AlertNotificationService) {
 
@@ -18,6 +19,8 @@ class ReceiveAlert(private val alertRepository: AlertRepository, private val ale
         return Alert(id, receiveAlertActionData.coordinates,
                 receiveAlertActionData.detectionMethods,
                 receiveAlertActionData.temperature,
-                receiveAlertActionData.gas)
+                receiveAlertActionData.gas,
+                Date()
+        )
     }
 }

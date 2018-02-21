@@ -1,4 +1,4 @@
-package com.untref.tesis.server.unit.action
+package com.untref.tesis.server.unit.alert.action
 
 import com.untref.tesis.server.alert.action.ReceiveAlertActionData
 import com.untref.tesis.server.alert.action.factory.*
@@ -88,14 +88,14 @@ class ReceiveAlertActionDataFactoryTest {
         assertEquals(defaultGas, receiveAlertActionData?.gas)
     }
 
-    private fun assertCoordinate(cardinalPoint: CardinalPoint, degree: Int, minute: Int, second: Float, coordinate: Coordinate?) {
+    private fun assertCoordinate(cardinalPoint: CardinalPoint, degree: Int, minute: Int, second: Double, coordinate: Coordinate?) {
         assertEquals(cardinalPoint, coordinate?.cardinalPoint)
         assertEquals(degree, coordinate?.degree)
         assertEquals(minute, coordinate?.minute)
         assertEquals(second, coordinate?.second)
     }
 
-    private fun givenFireAlertDto(coordinates: CoordinatesDto? = createCoordinates(), detectionMethods: List<DetectionMethod>? = defaultDetectionMethods,
+    private fun givenFireAlertDto(coordinates: CoordinatesDto? = createCoordinatesDto(), detectionMethods: List<DetectionMethod>? = defaultDetectionMethods,
                                   temperature: Float? = defaultTemperature, gas: Float? = defaultGas) {
         fireAlertDto = createFireAlertDto(coordinates, detectionMethods, temperature, gas)
     }

@@ -6,25 +6,25 @@ import com.untref.tesis.server.resource.dto.CoordinateDto
 import com.untref.tesis.server.resource.dto.CoordinatesDto
 import com.untref.tesis.server.resource.dto.FireAlertDto
 
-val defaultDegree = 30
-val defaultMinute = 50
-val defaultSecond = 23.4f
+const val defaultDegree = 30
+const val defaultMinute = 50
+const val defaultSecond = 23.4
 val south = CardinalPoint.SOUTH
 val east = CardinalPoint.EAST
-val defaultTemperature = 30f
-val defaultGas = 400f
+const val defaultTemperature = 30f
+const val defaultGas = 400f
 val defaultDetectionMethods = listOf(DetectionMethod.FIRE)
 
 fun createLatitude(degree: Int? = defaultDegree, minute: Int? = defaultMinute,
-                   second: Float? = defaultSecond, cardinalPoint: CardinalPoint? = south) =
+                   second: Double? = defaultSecond, cardinalPoint: CardinalPoint? = south) =
         CoordinateDto(degree, minute, second, cardinalPoint)
 
 fun createLongitude(degree: Int? = defaultDegree, minute: Int? = defaultMinute,
-                    second: Float? = defaultSecond, cardinalPoint: CardinalPoint? = east) =
+                    second: Double? = defaultSecond, cardinalPoint: CardinalPoint? = east) =
         CoordinateDto(degree, minute, second, cardinalPoint)
 
-fun createCoordinates() = CoordinatesDto(createLatitude(), createLongitude())
+fun createCoordinatesDto() = CoordinatesDto(createLatitude(), createLongitude())
 
-fun createFireAlertDto(coordinates: CoordinatesDto? = createCoordinates(), detectionMethods: List<DetectionMethod>? = defaultDetectionMethods,
+fun createFireAlertDto(coordinates: CoordinatesDto? = createCoordinatesDto(), detectionMethods: List<DetectionMethod>? = defaultDetectionMethods,
                        temperature: Float? = defaultTemperature, gas: Float? = defaultGas) =
         FireAlertDto(coordinates, detectionMethods, temperature, gas)

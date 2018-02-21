@@ -40,8 +40,8 @@ class AlarmResourceTest {
 
     private var mapper = ObjectMapper()
 
-    private val latitudeDto = CoordinateDto(30, 50, 23.4f, CardinalPoint.SOUTH)
-    private val longitudeDto = CoordinateDto(30, 50, 23.4f, CardinalPoint.EAST)
+    private val latitudeDto = CoordinateDto(30, 50, 23.4, CardinalPoint.SOUTH)
+    private val longitudeDto = CoordinateDto(30, 50, 23.4, CardinalPoint.EAST)
     private val coordinates = CoordinatesDto(latitudeDto, longitudeDto)
     private val detectionMethods = listOf(DetectionMethod.FIRE)
     private val temperature = 60F

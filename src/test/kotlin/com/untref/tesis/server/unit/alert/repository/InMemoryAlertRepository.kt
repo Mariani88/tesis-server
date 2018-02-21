@@ -1,4 +1,4 @@
-package com.untref.tesis.server.unit.repository
+package com.untref.tesis.server.unit.alert.repository
 
 import com.untref.tesis.server.alert.domain.Alert
 import com.untref.tesis.server.alert.domain.AlertRepository

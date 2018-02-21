@@ -6,6 +6,6 @@ import com.untref.tesis.server.alert.domain.CardinalPoint
 class CoordinateDto(
         @JsonProperty("d") val degree: Int?,
         @JsonProperty("m") val minute: Int?,
-        @JsonProperty("s") val second: Float?,
+        @JsonProperty("s") val second: Double?,
         @JsonProperty("cp") val cardinalPoint: CardinalPoint?
 )

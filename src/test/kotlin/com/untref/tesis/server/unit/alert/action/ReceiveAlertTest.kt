@@ -1,4 +1,4 @@
-package com.untref.tesis.server.unit.action
+package com.untref.tesis.server.unit.alert.action
 
 import com.untref.tesis.server.alert.action.ReceiveAlert
 import com.untref.tesis.server.alert.action.ReceiveAlertActionData
@@ -13,7 +13,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.times
 import org.mockito.MockitoAnnotations
-import com.untref.tesis.server.unit.repository.InMemoryAlertRepository
+import com.untref.tesis.server.unit.alert.repository.InMemoryAlertRepository
 
 class ReceiveAlertTest {
 

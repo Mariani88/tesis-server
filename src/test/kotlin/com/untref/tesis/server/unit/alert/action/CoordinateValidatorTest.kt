@@ -1,4 +1,4 @@
-package com.untref.tesis.server.unit.action
+package com.untref.tesis.server.unit.alert.action
 
 import com.untref.tesis.server.alert.action.validator.*
 import com.untref.tesis.server.builders.*
@@ -78,13 +78,13 @@ class CoordinateValidatorTest {
 
     @Test
     fun latitudeSecondsLowerThan0ThrowsException() {
-        givenALatitude(second = -0.01f)
+        givenALatitude(second = -0.01)
         thenExpectedExceptionWhenTryValidate({ givenALongitude() }, secondCanNotBeLowerThanZero)
     }
 
     @Test
     fun latitudeSecondsHigherOrEqualsThan60ThrowsException() {
-        givenALatitude(second = 60f)
+        givenALatitude(second = 60.0)
         thenExpectedExceptionWhenTryValidate({ givenALongitude() }, secondCanNotBeHigherOrEqualsThanSixty)
     }
 
@@ -150,13 +150,13 @@ class CoordinateValidatorTest {
 
     @Test
     fun longitudeSecondsLowerThan0ThrowsException() {
-        givenALongitude(second = -0.1f)
+        givenALongitude(second = -0.1)
         thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeSecondCanNotLowerThan0)
     }
 
     @Test
     fun longitudeSecondsHigherOrEqualsThan60ThrowsException() {
-        givenALongitude(second = 60f)
+        givenALongitude(second = 60.0)
         thenExpectedExceptionWhenTryValidate({ givenALatitude() }, longitudeSecondCanNotHigherOrEqualsThan60)
     }
 
@@ -219,12 +219,12 @@ class CoordinateValidatorTest {
     }
 
     private fun givenALongitude(degree: Int? = defaultDegree, minute: Int? = defaultMinute,
-                                second: Float? = defaultSecond, cardinalPoint: CardinalPoint? = east) {
+                                second: Double? = defaultSecond, cardinalPoint: CardinalPoint? = east) {
         longitude = createLongitude(degree, minute, second, cardinalPoint)
     }
 
     private fun givenALatitude(degree: Int? = defaultDegree, minute: Int? = defaultMinute,
-                               second: Float? = defaultSecond, cardinalPoint: CardinalPoint? = south) {
+                               second: Double? = defaultSecond, cardinalPoint: CardinalPoint? = south) {
         latitude = createLatitude(degree, minute, second, cardinalPoint)
     }
 
