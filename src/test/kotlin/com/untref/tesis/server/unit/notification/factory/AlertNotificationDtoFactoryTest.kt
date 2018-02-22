@@ -1,7 +1,8 @@
 package com.untref.tesis.server.unit.notification.factory
 
 import com.untref.tesis.server.alert.domain.Alert
-import com.untref.tesis.server.alert.domain.Coordinate
+import com.untref.tesis.server.alert.domain.Latitude
+import com.untref.tesis.server.alert.domain.Longitude
 import com.untref.tesis.server.builders.AlertBuilder.Companion.createAlert
 import com.untref.tesis.server.notification.dto.AlertNotificationDto
 import com.untref.tesis.server.notification.dto.CoordinateDto
@@ -51,14 +52,21 @@ class AlertNotificationDtoFactoryTest {
         Assert.assertEquals(alert.id, notificationDataDto.id)
         Assert.assertNotNull(notificationDataDto.latitude)
         Assert.assertNotNull(notificationDataDto.longitude)
-        assertCoordinate(notificationDataDto.latitude!!, alert.coordinates.latitude)
-        assertCoordinate(notificationDataDto.longitude!!, alert.coordinates.longitude)
+        assertLatitude(notificationDataDto.latitude!!, alert.coordinates.latitude)
+        assertLongitude(notificationDataDto.longitude!!, alert.coordinates.longitude)
     }
 
-    private fun assertCoordinate(coordinateDto: CoordinateDto, coordinate: Coordinate) {
-        Assert.assertEquals(coordinate.degree, coordinateDto.degree)
-        Assert.assertEquals(coordinate.minute, coordinateDto.minute)
-        Assert.assertEquals(coordinate.second, coordinateDto.second)
-        Assert.assertEquals(coordinate.cardinalPoint, coordinateDto.cardinalPoint)
+    private fun assertLatitude(coordinateDto: CoordinateDto, latitude: Latitude) {
+        Assert.assertEquals(latitude.degree, coordinateDto.degree)
+        Assert.assertEquals(latitude.minute, coordinateDto.minute)
+        Assert.assertEquals(latitude.second, coordinateDto.second)
+        Assert.assertEquals(latitude.cardinalPoint, coordinateDto.cardinalPoint)
+    }
+
+    private fun assertLongitude(coordinateDto: CoordinateDto, longitude: Longitude) {
+        Assert.assertEquals(longitude.degree, coordinateDto.degree)
+        Assert.assertEquals(longitude.minute, coordinateDto.minute)
+        Assert.assertEquals(longitude.second, coordinateDto.second)
+        Assert.assertEquals(longitude.cardinalPoint, coordinateDto.cardinalPoint)
     }
 }

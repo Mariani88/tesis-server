@@ -11,7 +11,6 @@ class AlertBuilder {
         private val date = Date()
 
         fun createAlert(): Alert =
-                Alert(alertId, createCoordinates(),
-                        defaultDetectionMethods, defaultTemperature, defaultGas, date)
+                Alert(alertId, createCoordinates(), defaultDetectionMethods, defaultTemperature, defaultGas, date)
     }
 }

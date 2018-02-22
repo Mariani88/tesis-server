@@ -1,5 +1,7 @@
 package com.untref.tesis.server.unit.alert.action
 
+import com.untref.tesis.server.alert.action.LatitudeActionData
+import com.untref.tesis.server.alert.action.LongitudeActionData
 import com.untref.tesis.server.alert.action.ReceiveAlertActionData
 import com.untref.tesis.server.alert.action.factory.*
 import com.untref.tesis.server.alert.action.validator.CoordinateValidator
@@ -7,7 +9,6 @@ import com.untref.tesis.server.alert.action.validator.LatitudeValidator
 import com.untref.tesis.server.alert.action.validator.LongitudeValidator
 import com.untref.tesis.server.builders.*
 import com.untref.tesis.server.alert.domain.CardinalPoint
-import com.untref.tesis.server.alert.domain.Coordinate
 import com.untref.tesis.server.alert.domain.DetectionMethod
 import com.untref.tesis.server.resource.dto.CoordinatesDto
 import com.untref.tesis.server.resource.dto.FireAlertDto
@@ -81,19 +82,28 @@ class ReceiveAlertActionDataFactoryTest {
 
     private fun thenCreateActionData() {
         assertNotNull(receiveAlertActionData)
-        assertCoordinate(south, defaultDegree, defaultMinute, defaultSecond, receiveAlertActionData?.coordinates?.latitude)
-        assertCoordinate(east, defaultDegree, defaultMinute, defaultSecond, receiveAlertActionData?.coordinates?.longitude)
+        assertLatitudeActionData(south, defaultDegree, defaultMinute, defaultSecond, receiveAlertActionData?.coordinates?.latitudeActionData)
+        assertLongitudeActionData(east, defaultDegree, defaultMinute, defaultSecond, receiveAlertActionData?.coordinates?.longitudeActionData)
         assertEquals(defaultDetectionMethods, receiveAlertActionData?.detectionMethods)
         assertEquals(defaultTemperature, receiveAlertActionData?.temperature)
         assertEquals(defaultGas, receiveAlertActionData?.gas)
     }
 
-    private fun assertCoordinate(cardinalPoint: CardinalPoint, degree: Int, minute: Int, second: Double, coordinate: Coordinate?) {
-        assertEquals(cardinalPoint, coordinate?.cardinalPoint)
-        assertEquals(degree, coordinate?.degree)
-        assertEquals(minute, coordinate?.minute)
-        assertEquals(second, coordinate?.second)
+    private fun assertLatitudeActionData(cardinalPoint: CardinalPoint, degree: Int, minute: Int, second: Double, latitudeActionData: LatitudeActionData?) {
+        assertEquals(cardinalPoint, latitudeActionData?.cardinalPoint)
+        assertEquals(degree, latitudeActionData?.degree)
+        assertEquals(minute, latitudeActionData?.minute)
+        assertEquals(second, latitudeActionData?.second)
     }
+
+    private fun assertLongitudeActionData(cardinalPoint: CardinalPoint, degree: Int, minute: Int, second: Double, longitudeActionData:
+    LongitudeActionData?) {
+        assertEquals(cardinalPoint, longitudeActionData?.cardinalPoint)
+        assertEquals(degree, longitudeActionData?.degree)
+        assertEquals(minute, longitudeActionData?.minute)
+        assertEquals(second, longitudeActionData?.second)
+    }
+
 
     private fun givenFireAlertDto(coordinates: CoordinatesDto? = createCoordinatesDto(), detectionMethods: List<DetectionMethod>? = defaultDetectionMethods,
                                   temperature: Float? = defaultTemperature, gas: Float? = defaultGas) {

@@ -15,15 +15,15 @@ const val defaultTemperature = 30f
 const val defaultGas = 400f
 val defaultDetectionMethods = listOf(DetectionMethod.FIRE)
 
-fun createLatitude(degree: Int? = defaultDegree, minute: Int? = defaultMinute,
-                   second: Double? = defaultSecond, cardinalPoint: CardinalPoint? = south) =
+fun createLatitudeActionData(degree: Int? = defaultDegree, minute: Int? = defaultMinute,
+                             second: Double? = defaultSecond, cardinalPoint: CardinalPoint? = south) =
         CoordinateDto(degree, minute, second, cardinalPoint)
 
-fun createLongitude(degree: Int? = defaultDegree, minute: Int? = defaultMinute,
-                    second: Double? = defaultSecond, cardinalPoint: CardinalPoint? = east) =
+fun createLongitudeActionData(degree: Int? = defaultDegree, minute: Int? = defaultMinute,
+                              second: Double? = defaultSecond, cardinalPoint: CardinalPoint? = east) =
         CoordinateDto(degree, minute, second, cardinalPoint)
 
-fun createCoordinatesDto() = CoordinatesDto(createLatitude(), createLongitude())
+fun createCoordinatesDto() = CoordinatesDto(createLatitudeActionData(), createLongitudeActionData())
 
 fun createFireAlertDto(coordinates: CoordinatesDto? = createCoordinatesDto(), detectionMethods: List<DetectionMethod>? = defaultDetectionMethods,
                        temperature: Float? = defaultTemperature, gas: Float? = defaultGas) =

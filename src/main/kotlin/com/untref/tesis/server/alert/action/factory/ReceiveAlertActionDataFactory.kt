@@ -1,5 +1,6 @@
 package com.untref.tesis.server.alert.action.factory
 
+import com.untref.tesis.server.alert.action.CoordinatesActionData
 import com.untref.tesis.server.alert.action.ReceiveAlertActionData
 import com.untref.tesis.server.alert.action.validator.CoordinateValidator
 import com.untref.tesis.server.alert.domain.Coordinates
@@ -19,7 +20,7 @@ class ReceiveAlertActionDataFactory(private val coordinateValidator: CoordinateV
         return ReceiveAlertActionData(coordinates, detectionMethods, temperature, gas)
     }
 
-    private fun validate(coordinatesDto: CoordinatesDto?): Coordinates =
+    private fun validate(coordinatesDto: CoordinatesDto?): CoordinatesActionData =
             checkNotNull(coordinatesDto, coordinatesCanNotBeNull).let { coordinateValidator.validate(it) }
 
     private fun validate(gas: Float?): Float =
