@@ -51,6 +51,6 @@ class FileAlertRepositoryTest {
     }
 
     private fun givenAlert() {
-        alert = Alert(alertId, coordinates, detectionMethods, temperature, gas, date)
+        alert = Alert.build(alertId, coordinates, detectionMethods, temperature, gas, date)
     }
 }

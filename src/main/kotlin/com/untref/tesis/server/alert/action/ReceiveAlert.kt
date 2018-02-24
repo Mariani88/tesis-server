@@ -20,7 +20,7 @@ class ReceiveAlert(private val alertRepository: AlertRepository, private val ale
         val latitude = Latitude.build(latitudeActionData.degree, latitudeActionData.minute, latitudeActionData.second, latitudeActionData.cardinalPoint)
         val longitude = Longitude.build(longitudeActionData.degree, longitudeActionData.minute, longitudeActionData.second, longitudeActionData.cardinalPoint)
         val coordinates = Coordinates(latitude, longitude)
-        return Alert(id, coordinates, receiveAlertActionData.detectionMethods, receiveAlertActionData.temperature,
+        return Alert.build(id, coordinates, receiveAlertActionData.detectionMethods, receiveAlertActionData.temperature,
                 receiveAlertActionData.gas, Date())
     }
 }

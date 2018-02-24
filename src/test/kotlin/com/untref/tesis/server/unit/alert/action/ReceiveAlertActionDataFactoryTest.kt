@@ -32,13 +32,6 @@ class ReceiveAlertActionDataFactoryTest {
     }
 
     @Test
-    fun negativeGasThrowException() {
-        givenFireAlertDto(gas = -1f)
-        whenTryCreateActionData()
-        thenExpectedException(gasCanNotBeNegative)
-    }
-
-    @Test
     fun nullGasThrowsException() {
         givenFireAlertDto(gas = null)
         whenTryCreateActionData()
@@ -57,13 +50,6 @@ class ReceiveAlertActionDataFactoryTest {
         givenFireAlertDto(detectionMethods = null)
         whenTryCreateActionData()
         thenExpectedException(detectionMethodsCanNotBeNull)
-    }
-
-    @Test
-    fun emptyDetectionMethodThrowException() {
-        givenFireAlertDto(detectionMethods = listOf())
-        whenTryCreateActionData()
-        thenExpectedException(detectionMethodsCanNotBeEmpty)
     }
 
     @Test

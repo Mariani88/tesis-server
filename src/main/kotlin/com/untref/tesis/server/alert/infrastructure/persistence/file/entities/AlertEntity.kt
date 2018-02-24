@@ -19,5 +19,5 @@ class AlertEntity(private val id: Long,
                 .gas, alert.date.time)
     }
 
-    fun toAlert(): Alert = Alert(id, coordinatesEntity.toCoordinates(), detectionMethods, temperature, gas, Date(date))
+    fun toAlert(): Alert = Alert.build(id, coordinatesEntity.toCoordinates(), detectionMethods, temperature, gas, Date(date))
 }
