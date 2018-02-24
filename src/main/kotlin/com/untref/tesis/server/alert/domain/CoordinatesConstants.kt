@@ -1,4 +1,4 @@
-package com.untref.tesis.server.alert.action.validator
+package com.untref.tesis.server.alert.domain
 
 const val zero = 0
 const val maxLatitudeDegree = 90

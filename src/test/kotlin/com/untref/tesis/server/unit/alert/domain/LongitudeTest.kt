@@ -1,8 +1,6 @@
 package com.untref.tesis.server.unit.alert.domain
 
-import com.untref.tesis.server.alert.action.validator.*
-import com.untref.tesis.server.alert.domain.CardinalPoint
-import com.untref.tesis.server.alert.domain.Longitude
+import com.untref.tesis.server.alert.domain.*
 import com.untref.tesis.server.builders.*
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
