@@ -21,7 +21,7 @@ class CoordinateValidatorTest {
 
     @Before
     fun setUp() {
-        coordinatesValidator = CoordinateValidator(LatitudeValidator(), LongitudeValidator())
+        coordinatesValidator = CoordinateValidator(CoordinateDtoPropertyValidator())
     }
 
     @Test

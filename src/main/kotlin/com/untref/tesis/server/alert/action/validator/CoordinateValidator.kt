@@ -1,14 +1,13 @@
 package com.untref.tesis.server.alert.action.validator
 
 import com.untref.tesis.server.alert.action.CoordinatesActionData
-import com.untref.tesis.server.alert.domain.Coordinates
 import com.untref.tesis.server.resource.dto.CoordinatesDto
 
-class CoordinateValidator(private val latitudeValidator: LatitudeValidator, private val longitudeValidator: LongitudeValidator) {
+class CoordinateValidator(private val coordinateDtoPropertyValidator: CoordinateDtoPropertyValidator) {
 
     fun validate(coordinatesDto: CoordinatesDto): CoordinatesActionData {
-        val latitude = latitudeValidator.validate(coordinatesDto.latitude)
-        val longitude = longitudeValidator.validate(coordinatesDto.longitude)
+        val latitude = coordinateDtoPropertyValidator.validateLatitudeDto(coordinatesDto.latitude)
+        val longitude = coordinateDtoPropertyValidator.validateLongitudeDto(coordinatesDto.longitude)
         return CoordinatesActionData(latitude, longitude)
     }
 }

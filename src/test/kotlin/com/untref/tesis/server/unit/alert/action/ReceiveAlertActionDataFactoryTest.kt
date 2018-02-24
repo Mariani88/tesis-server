@@ -5,8 +5,7 @@ import com.untref.tesis.server.alert.action.LongitudeActionData
 import com.untref.tesis.server.alert.action.ReceiveAlertActionData
 import com.untref.tesis.server.alert.action.factory.*
 import com.untref.tesis.server.alert.action.validator.CoordinateValidator
-import com.untref.tesis.server.alert.action.validator.LatitudeValidator
-import com.untref.tesis.server.alert.action.validator.LongitudeValidator
+import com.untref.tesis.server.alert.action.validator.CoordinateDtoPropertyValidator
 import com.untref.tesis.server.builders.*
 import com.untref.tesis.server.alert.domain.CardinalPoint
 import com.untref.tesis.server.alert.domain.DetectionMethod
@@ -27,7 +26,7 @@ class ReceiveAlertActionDataFactoryTest {
 
     @Before
     fun setUp() {
-        val coordinateValidator = CoordinateValidator(LatitudeValidator(), LongitudeValidator())
+        val coordinateValidator = CoordinateValidator(CoordinateDtoPropertyValidator())
         receiveAlertActionDataFactory = ReceiveAlertActionDataFactory(coordinateValidator)
     }
 
