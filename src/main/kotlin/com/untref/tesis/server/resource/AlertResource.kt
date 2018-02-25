@@ -29,7 +29,7 @@ class AlertResource(private val receiveAlert: ReceiveAlert, private val receiveA
         System.out.println("pass")
 
         val alert = Alert.build(1L, Coordinates(Latitude.build(1,1,1.0, CardinalPoint.SOUTH),
-                Longitude.build(1,1,1.0, CardinalPoint.WEST)), listOf(), 34f, 34f, Date())
+                Longitude.build(1,1,1.0, CardinalPoint.WEST)), listOf(DetectionMethod.FIRE), 34f, 34f, Date())
 
         FirebaseNotificationService(TARGET).send(alert)
 
