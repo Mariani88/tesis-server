@@ -28,8 +28,8 @@ class AlertResource(private val receiveAlert: ReceiveAlert, private val receiveA
     fun test(): ReceivedAlertDto {
         System.out.println("pass")
 
-        val alert = Alert.build(1L, Coordinates(Latitude.build(1,1,1.0, CardinalPoint.SOUTH),
-                Longitude.build(1,1,1.0, CardinalPoint.WEST)), listOf(DetectionMethod.FIRE), 34f, 34f, Date())
+        val alert = Alert.build((Random().nextDouble() * 1000).toLong(), Coordinates(Latitude.build(34,33,15.8, CardinalPoint.SOUTH),
+                Longitude.build(58,36,32.61, CardinalPoint.WEST)), listOf(DetectionMethod.FIRE), 34f, 34f, Date())
 
         FirebaseNotificationService(TARGET).send(alert)
 
