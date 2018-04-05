@@ -5,9 +5,13 @@ import com.untref.tesis.server.Application
 import com.untref.tesis.server.alert.domain.AlertRepository
 import com.untref.tesis.server.alert.domain.CardinalPoint
 import com.untref.tesis.server.alert.domain.DetectionMethod
+import com.untref.tesis.server.extensions.getValue
+import com.untref.tesis.server.properties.Property
+import com.untref.tesis.server.properties.PropertyFilePath
 import com.untref.tesis.server.resource.dto.CoordinateDto
 import com.untref.tesis.server.resource.dto.CoordinatesDto
 import com.untref.tesis.server.resource.dto.FireAlertDto
+import org.junit.After
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
@@ -23,7 +27,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup
 import org.springframework.web.context.WebApplicationContext
-
+import java.io.File
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest(classes = [Application::class])
@@ -53,6 +57,11 @@ class AlertResourceTest {
     @Before
     fun setUp() {
         mvc = webAppContextSetup(webApplicationContext).build()
+    }
+
+    @After
+    fun clean(){
+        File(Property().from(PropertyFilePath.APPLICATION).getValue<String>("alerts.file.path")).delete()
     }
 
     @Test

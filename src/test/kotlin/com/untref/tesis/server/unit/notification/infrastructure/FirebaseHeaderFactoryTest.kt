@@ -1,7 +1,6 @@
 package com.untref.tesis.server.unit.notification.infrastructure
 
 import com.untref.tesis.server.notification.infrastructure.FirebaseHeaderFactory
-import com.untref.tesis.server.notification.infrastructure.SERVER_KEY
 import org.junit.Assert
 import org.junit.Test
 import org.springframework.http.HttpHeaders
@@ -28,10 +27,10 @@ class FirebaseHeaderFactoryTest {
     }
 
     private fun whenCreateHeader() {
-        header = FirebaseHeaderFactory.create()
+        header = FirebaseHeaderFactory(serverKey).create()
     }
 
     private fun givenAServerKey() {
-        serverKey = SERVER_KEY
+        serverKey = "server-key"
     }
 }

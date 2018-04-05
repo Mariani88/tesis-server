@@ -1,16 +1,16 @@
-package com.untref.tesis.server.utils
+package com.untref.tesis.server.properties
 
 import java.util.*
 
 class Property {
 
-    private val properties: MutableMap<PropertyName, Properties> = mutableMapOf()
+    private val properties: MutableMap<PropertyFilePath, Properties> = mutableMapOf()
 
     init {
-        PropertyName.values().forEach { properties[it] = loadPropertyFile(it.name.toLowerCase()) }
+        PropertyFilePath.values().forEach { properties[it] = loadPropertyFile(it.name.toLowerCase()) }
     }
 
-    fun from(propertyName: PropertyName) = properties[propertyName]!!
+    fun from(propertyFilePath: PropertyFilePath):Properties = properties[propertyFilePath]!!
 
     private fun loadPropertyFile(propertyName: String): Properties {
         val properties = Properties()
