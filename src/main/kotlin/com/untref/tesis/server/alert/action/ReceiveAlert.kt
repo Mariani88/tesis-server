@@ -2,7 +2,9 @@ package com.untref.tesis.server.alert.action
 
 import com.untref.tesis.server.alert.domain.*
 import com.untref.tesis.server.notification.domain.AlertNotificationService
+import rx.Scheduler
 import rx.Single
+import rx.schedulers.Schedulers
 import java.util.*
 
 class ReceiveAlert(private val alertRepository: AlertRepository, private val alertNotificationService: AlertNotificationService) {
@@ -11,6 +13,7 @@ class ReceiveAlert(private val alertRepository: AlertRepository, private val ale
         Single.just(alertRepository.lastId())
                 .map { buildAlert(it, receiveAlertActionData) }
                 .doOnSuccess { alertRepository.store(it) }
+                .observeOn(Schedulers.newThread())
                 .subscribe({ alertNotificationService.send(it) })
     }
 
