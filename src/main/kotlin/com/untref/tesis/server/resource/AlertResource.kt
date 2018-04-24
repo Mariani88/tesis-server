@@ -4,10 +4,7 @@ import com.untref.tesis.server.alert.action.ReceiveAlert
 import com.untref.tesis.server.alert.action.ReceiveAlertActionData
 import com.untref.tesis.server.alert.action.factory.ReceiveAlertActionDataFactory
 import com.untref.tesis.server.alert.domain.*
-import com.untref.tesis.server.extensions.getValue
 import com.untref.tesis.server.notification.infrastructure.FirebaseNotificationService
-import com.untref.tesis.server.properties.Property
-import com.untref.tesis.server.properties.PropertyFilePath
 import com.untref.tesis.server.resource.dto.FireAlertDto
 import com.untref.tesis.server.resource.dto.ReceivedAlertDto
 import org.springframework.web.bind.annotation.GetMapping

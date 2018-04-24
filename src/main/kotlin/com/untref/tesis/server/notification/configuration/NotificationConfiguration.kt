@@ -1,6 +1,6 @@
 package com.untref.tesis.server.notification.configuration
 
-import com.untref.tesis.server.extensions.getValue
+import com.untref.tesis.server.extensions.getString
 import com.untref.tesis.server.notification.domain.AlertNotificationService
 import com.untref.tesis.server.notification.infrastructure.FirebaseHeaderFactory
 import com.untref.tesis.server.notification.infrastructure.FirebaseNotificationService
@@ -20,14 +20,14 @@ class NotificationConfiguration {
 
     @Bean
     fun alertNotificationService(property: Property, firebaseHeaderFactory: FirebaseHeaderFactory): AlertNotificationService {
-        val target = property.from(PropertyFilePath.FIREBASE).getValue<String>(TARGET)
-        val url = property.from(PropertyFilePath.FIREBASE).getValue<String>(URL)
+        val target = property.from(PropertyFilePath.FIREBASE).getString(TARGET)
+        val url = property.from(PropertyFilePath.FIREBASE).getString(URL)
         return FirebaseNotificationService(target, url, firebaseHeaderFactory)
     }
 
     @Bean
     fun firebaseHeaderFactory(property: Property): FirebaseHeaderFactory {
-        val serverKey = property.from(PropertyFilePath.FIREBASE).getValue<String>(SERVER_KEY)
+        val serverKey = property.from(PropertyFilePath.FIREBASE).getString(SERVER_KEY)
         return FirebaseHeaderFactory(serverKey)
     }
 }

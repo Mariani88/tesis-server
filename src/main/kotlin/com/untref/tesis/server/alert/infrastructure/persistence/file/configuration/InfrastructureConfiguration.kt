@@ -2,7 +2,7 @@ package com.untref.tesis.server.alert.infrastructure.persistence.file.configurat
 
 import com.untref.tesis.server.alert.domain.AlertRepository
 import com.untref.tesis.server.alert.infrastructure.persistence.file.FileAlertRepository
-import com.untref.tesis.server.extensions.getValue
+import com.untref.tesis.server.extensions.getString
 import com.untref.tesis.server.properties.Property
 import com.untref.tesis.server.properties.PropertyFilePath
 import org.springframework.context.annotation.Bean
@@ -17,7 +17,7 @@ class InfrastructureConfiguration {
 
     @Bean
     fun alertRepository(property: Property): AlertRepository {
-        val path = property.from(PropertyFilePath.APPLICATION).getValue<String>(PATH)
+        val path = property.from(PropertyFilePath.APPLICATION).getString(PATH)
         return FileAlertRepository(path)
     }
 }

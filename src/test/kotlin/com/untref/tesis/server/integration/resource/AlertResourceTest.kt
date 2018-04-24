@@ -5,7 +5,7 @@ import com.untref.tesis.server.Application
 import com.untref.tesis.server.alert.domain.AlertRepository
 import com.untref.tesis.server.alert.domain.CardinalPoint
 import com.untref.tesis.server.alert.domain.DetectionMethod
-import com.untref.tesis.server.extensions.getValue
+import com.untref.tesis.server.extensions.getString
 import com.untref.tesis.server.properties.Property
 import com.untref.tesis.server.properties.PropertyFilePath
 import com.untref.tesis.server.resource.dto.CoordinateDto
@@ -61,7 +61,7 @@ class AlertResourceTest {
 
     @After
     fun clean(){
-        File(Property().from(PropertyFilePath.APPLICATION).getValue<String>("alerts.file.path")).delete()
+        File(Property().from(PropertyFilePath.APPLICATION).getString("alerts.file.path")).delete()
     }
 
     @Test
