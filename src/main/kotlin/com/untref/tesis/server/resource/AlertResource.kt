@@ -19,10 +19,9 @@ class AlertResource(private val receiveAlert: ReceiveAlert,
                     private val firebaseNotificationService: FirebaseNotificationService) {
 
     @PostMapping("/alert")
-    fun receiveAlert(@RequestBody fireAlertDto: FireAlertDto): ReceivedAlertDto {
+    fun receiveAlert(@RequestBody fireAlertDto: FireAlertDto) {
         System.out.println("pass")
         receiveAlert(createReceiveAlertActionData(fireAlertDto))
-        return ReceivedAlertDto(true)
     }
 
     @GetMapping("/alert")
