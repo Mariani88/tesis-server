@@ -7,7 +7,7 @@ import java.util.*
 
 class AlertEntity(private val id: Long,
                   private val coordinatesEntity: CoordinatesEntity,
-                  private val detectionMethods: List<DetectionMethod>,
+                  private val detectionMethods: List<String>,
                   private val temperature: Float,
                   private val gas: Float,
                   private val date: Long
@@ -15,9 +15,12 @@ class AlertEntity(private val id: Long,
 ) : Serializable {
 
     companion object {
-        fun from(alert: Alert) = AlertEntity(alert.id, CoordinatesEntity.from(alert.coordinates), alert.detectionMethods, alert.temperature, alert
+        fun from(alert: Alert) = AlertEntity(alert.id, CoordinatesEntity.from(alert.coordinates), alert.detectionMethods.map { it.name }, alert
+                .temperature, alert
                 .gas, alert.date.time)
     }
 
-    fun toAlert(): Alert = Alert.build(id, coordinatesEntity.toCoordinates(), detectionMethods, temperature, gas, Date(date))
+    fun toAlert(): Alert = Alert.build(id, coordinatesEntity.toCoordinates(), detectionMethods.map { DetectionMethod.valueOf(it) }, temperature,
+            gas, Date
+    (date))
 }
