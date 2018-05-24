@@ -39,11 +39,9 @@ class ReceiveAlertTest {
         alertRepository = InMemoryAlertRepository()
         receiveAlert = ReceiveAlert(alertRepository, alertNotificationService)
 
-        RxJavaPlugins.reset()
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
         RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
-
-
     }
 
     @Test
