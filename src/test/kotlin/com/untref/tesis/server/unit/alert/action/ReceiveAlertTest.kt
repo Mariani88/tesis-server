@@ -35,6 +35,12 @@ class ReceiveAlertTest {
         MockitoAnnotations.initMocks(this)
         alertRepository = InMemoryAlertRepository()
         receiveAlert = ReceiveAlert(alertRepository, alertNotificationService)
+
+
+
+
+
+
     }
 
     @Test
