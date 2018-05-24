@@ -13,6 +13,9 @@ import org.mockito.Mockito
 import org.mockito.Mockito.times
 import org.mockito.MockitoAnnotations
 import com.untref.tesis.server.unit.alert.repository.InMemoryAlertRepository
+import io.reactivex.Scheduler
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
 import org.assertj.core.api.Assertions.assertThat
 
 class ReceiveAlertTest {
@@ -36,9 +39,9 @@ class ReceiveAlertTest {
         alertRepository = InMemoryAlertRepository()
         receiveAlert = ReceiveAlert(alertRepository, alertNotificationService)
 
-
-
-
+        RxJavaPlugins.reset()
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
 
 
     }
