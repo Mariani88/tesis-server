@@ -3,6 +3,7 @@ package com.untref.tesis.server.integration.infrastructure
 import com.untref.tesis.server.builders.CoordinatesBuilder
 import com.untref.tesis.server.alert.domain.*
 import com.untref.tesis.server.alert.infrastructure.persistence.file.FileAlertRepository
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -38,6 +39,17 @@ class FileAlertRepositoryTest {
         givenAlert()
         whenStoreAlert()
         thenStoreIt()
+    }
+
+    @Test
+    fun lastIdReturnNextIdForAlert(){
+        givenAlert()
+        whenStoreAlert()
+        thenLastIdIs(2L)
+    }
+
+    private fun thenLastIdIs(alertId: Long) {
+        assertThat(fileAlertRepository.lastId()).isEqualTo(alertId)
     }
 
     private fun thenStoreIt() {

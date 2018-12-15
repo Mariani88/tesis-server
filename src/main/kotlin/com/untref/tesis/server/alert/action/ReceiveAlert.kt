@@ -2,9 +2,10 @@ package com.untref.tesis.server.alert.action
 
 import com.untref.tesis.server.alert.domain.*
 import com.untref.tesis.server.notification.domain.AlertNotificationService
+import io.reactivex.Completable
 import io.reactivex.Single
+import io.reactivex.exceptions.Exceptions
 import io.reactivex.schedulers.Schedulers
-
 import java.util.*
 
 class ReceiveAlert(private val alertRepository: AlertRepository, private val alertNotificationService: AlertNotificationService) {
@@ -12,9 +13,14 @@ class ReceiveAlert(private val alertRepository: AlertRepository, private val ale
     operator fun invoke(receiveAlertActionData: ReceiveAlertActionData) {
         Single.just(alertRepository.lastId())
                 .map { buildAlert(it, receiveAlertActionData) }
-                .doOnSuccess { alertRepository.store(it) }
-                .observeOn(Schedulers.newThread())
-                .subscribe({ alertNotificationService.send(it) }, {})
+                .doOnSuccess { sendAlert(it) }
+                .subscribe({ alertRepository.store(it) }, { Exceptions.propagate(it) })
+    }
+
+    private fun sendAlert(it: Alert) {
+        Completable.fromAction { alertNotificationService.send(it) }
+                .subscribeOn(Schedulers.newThread())
+                .subscribe()
     }
 
     private fun buildAlert(id: Long, receiveAlertActionData: ReceiveAlertActionData): Alert {

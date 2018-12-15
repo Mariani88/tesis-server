@@ -8,7 +8,7 @@ import java.util.*
 
 class FileAlertRepository (private val path: String): AlertRepository {
 
-    private var lastId = 1L
+    private var lastId = getAll().size.toLong() + 1
 
     override fun store(alert: Alert) {
         val alerts = getAll()
