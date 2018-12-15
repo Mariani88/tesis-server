@@ -1,10 +1,15 @@
 package com.untref.tesis.server.unit.alert.action
 
 import com.untref.tesis.server.alert.action.*
-import com.untref.tesis.server.builders.CoordinatesBuilder
 import com.untref.tesis.server.alert.domain.*
+import com.untref.tesis.server.builders.CoordinatesBuilder
 import com.untref.tesis.server.extensions.MockitoExtensions
 import com.untref.tesis.server.notification.domain.AlertNotificationService
+import com.untref.tesis.server.unit.alert.repository.InMemoryAlertRepository
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.catchThrowable
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -12,11 +17,6 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.times
 import org.mockito.MockitoAnnotations
-import com.untref.tesis.server.unit.alert.repository.InMemoryAlertRepository
-import io.reactivex.Scheduler
-import io.reactivex.plugins.RxJavaPlugins
-import io.reactivex.schedulers.Schedulers
-import org.assertj.core.api.Assertions.assertThat
 
 class ReceiveAlertTest {
 
@@ -29,6 +29,7 @@ class ReceiveAlertTest {
     private lateinit var receiveAlert: ReceiveAlert
     private lateinit var alert: ReceiveAlertActionData
     private lateinit var alertRepository: AlertRepository
+    private var exception: Throwable? = null
 
     @Mock
     private lateinit var alertNotificationService: AlertNotificationService
@@ -92,7 +93,7 @@ class ReceiveAlertTest {
     }
 
     private fun whenReceiveAlert() {
-        receiveAlert(alert)
+        exception = catchThrowable { receiveAlert(alert) }
     }
 
     private fun givenAlert() {
