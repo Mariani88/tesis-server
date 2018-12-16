@@ -11,10 +11,10 @@ import java.util.*
 class ReceiveAlert(private val alertRepository: AlertRepository, private val alertNotificationService: AlertNotificationService) {
 
     operator fun invoke(receiveAlertActionData: ReceiveAlertActionData) {
-        Single.just(alertRepository.lastId())
-                .map { buildAlert(it, receiveAlertActionData) }
-                .doOnSuccess { sendAlert(it) }
-                .subscribe({ alertRepository.store(it) }, { Exceptions.propagate(it) })
+        val lastId = alertRepository.lastId()
+        val alert = buildAlert(lastId, receiveAlertActionData)
+        alertRepository.store(alert)
+        sendAlert(alert)
     }
 
     private fun sendAlert(it: Alert) {
