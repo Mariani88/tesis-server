@@ -7,9 +7,13 @@
 
 Esta aplicación es parte de un sistema de detección de incendios de tiempo real. Consiste en una API Rest, la cual recibe alertas de incendio de una alarma y las envía a Firebase, para que este último las transmita a dispositivos mobile.
 
-La alarma que envía las alertas a esta API Rest se encuentra alojada en el siguiente repositorio: https://github.com/Mariani88/tesis-alarm
 
-La aplicación Android, que recibe las alertas de incendio desde Firebase, se encuentra en el siguiente repositorio: https://github.com/Mariani88/tesis-android
+El conjunto de aplicaciones se encuentra en los siguientes repositorios:
+
+Software de la alarma: https://github.com/Mariani88/tesis-alarm
+La aplicacion Android que configura la alarma: https://github.com/Mariani88/tesis-android-config
+La API Rest que recibe las alertas: https://github.com/Mariani88/tesis-server
+La aplicación mobile receptora de alertas: https://github.com/Mariani88/tesis-android
 
 
 - Dependencias del proyecto
